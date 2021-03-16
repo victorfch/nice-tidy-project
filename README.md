@@ -1,1 +1,0 @@
-# nice-tidy-project
