@@ -2,6 +2,13 @@
 
 Proyecto para la administración de la limpieza de habitaciones de los hoteles
 
+## Autores ✒️
+* **Lorena Jiménez Tejada** - [lorejim](https://github.com/lorejim)
+* **Víctor Manuel Faría Chávez** - [victorfch](https://github.com/victorfch)
+2º CFGS Informática y Comunicaciones - Desarrollo de Aplicaciones Web
+IES Las Galletas
+2020/2021
+
 ## Clonar la repo
 ```sh
 git clone https://github.com/victorfch/nice-tidy-project.git
@@ -48,7 +55,3 @@ mvn spring-boot:run
 El backend correrá en localhost:8080
 Se usa una base de datos mysql llamada nice, usuario root y sin contraseña
 
-
-## Autores ✒️
-* **Lorena Jiménez Tejada** - [lorejim](https://github.com/lorejim)
-* **Víctor Manuel Faría Chávez** - [victorfch](https://github.com/victorfch)
