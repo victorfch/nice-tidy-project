@@ -7,7 +7,9 @@ Proyecto para la administración de la limpieza de habitaciones de los hoteles
 * **Víctor Manuel Faría Chávez** - [victorfch](https://github.com/victorfch)
 
 2º CFGS Informática y Comunicaciones - Desarrollo de Aplicaciones Web
+
 IES Las Galletas
+
 2020/2021
 
 ## Clonar la repo
