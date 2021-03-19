@@ -43,7 +43,7 @@ Java jdk 1.8.0 y Maven
    ```
 ### Arrancar el servidor 🚀
 ```sh
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 El backend correrá en localhost:8080
 Se usa una base de datos mysql llamada nice, usuario root y sin contraseña
