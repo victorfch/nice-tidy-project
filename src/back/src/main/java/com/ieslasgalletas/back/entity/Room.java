@@ -6,52 +6,54 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name="rooms")
+@Table(name = "rooms")
 public class Room {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="number")
+
+	@Column(name = "number")
 	private int number;
-	
-	@Column(name="beds_number")
+
+	@Column(name = "beds_number")
 	private int bedsNumber;
-	
-	@Column(name="check_in_date")
+
+	@Column(name = "check_in_date")
 	private Date checkInDate;
-	
-	@Column(name="check_out_date")
+
+	@Column(name = "check_out_date")
 	private Date checkOutDate;
-	
-	
-	@Column(name="is_clean")
+
+	@Column(name = "is_clean")
 	private boolean isClean;
-	
-	@Column(name="is_occupied")
+
+	@Column(name = "is_occupied")
 	private boolean isOccupied;
-	
-	@Column(name="is_urgent")
+
+	@Column(name = "is_urgent")
 	private boolean isUrgent;
-	
-	@Column(name="maid_id")
-	private int maidId;
-	
-	@Column(name="type")
+
+	@Column(name = "type")
 	private int type;
-	
-	
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private User user;
+
 	public Room() {
 	}
-	
 
 	public Room(int id, int number, int bedsNumber, Date checkInDate, Date checkOutDate, boolean isClean,
-			boolean isOccupied, boolean isUrgent, int maidId, int type) {
+			boolean isOccupied, boolean isUrgent, int type, User user) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -61,10 +63,10 @@ public class Room {
 		this.isClean = isClean;
 		this.isOccupied = isOccupied;
 		this.isUrgent = isUrgent;
-		this.maidId = maidId;
 		this.type = type;
+		this.user = user;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -97,20 +99,24 @@ public class Room {
 		return isUrgent;
 	}
 
-	public int getMaidId() {
-		return maidId;
-	}
-
 	public int getType() {
 		return type;
 	}
 
+	public String getUser_id() {
+		return user.getFullName();
+	}
+
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
 
 	@Override
 	public String toString() {
 		return "Room [id=" + id + ", number=" + number + ", bedsNumber=" + bedsNumber + ", checkInDate=" + checkInDate
 				+ ", checkOutDate=" + checkOutDate + ", isClean=" + isClean + ", isOccupied=" + isOccupied
-				+ ", isUrgent=" + isUrgent + ", maidId=" + maidId + ", type=" + type + "]";
+				+ ", isUrgent=" + isUrgent + ", type=" + type + "]";
 	}
 
 }
