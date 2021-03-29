@@ -9,5 +9,4 @@ import com.ieslasgalletas.back.entity.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Serializable> {
-
 }

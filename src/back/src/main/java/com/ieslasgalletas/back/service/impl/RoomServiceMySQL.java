@@ -19,4 +19,25 @@ public class RoomServiceMySQL implements RoomService {
 		return roomRepository.findAll();
 	}
 
+	@Override
+	public void updateRoom(Room newRoom, int id) {
+		roomRepository.findById(id).map(room -> {
+			room.setClean(newRoom.isClean());
+			room.setOccupied(newRoom.isOccupied());
+			room.setUrgent(newRoom.isUrgent());
+			return roomRepository.save(room);
+		});
+	}
+
+	@Override
+	public void deleteReservation(int id) {
+		roomRepository.findById(id).map(room -> {
+			room.setCheckInDate(null);
+			room.setCheckOutDate(null);
+			room.setClean(true);
+			room.setUrgent(false);
+			room.setOccupied(false);
+			return roomRepository.save(room);
+		});
+	}
 }
