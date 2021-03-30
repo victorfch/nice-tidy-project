@@ -4,7 +4,7 @@
       <div class="col-12"><h3>Habitaciones</h3></div>
     </div>
     <hr />
-    <form class="form-group row pl-3" >
+    <form class="form-group row pl-3 justify-content-center" >
       <label for="number" class="col-form-label mr-2">Nº Habitación: </label>
       <input type="number" class="form-control col-1" id="number" />
       <label for="beds" class="col-form-label ml-4 mr-2">Nº Camas: </label>
