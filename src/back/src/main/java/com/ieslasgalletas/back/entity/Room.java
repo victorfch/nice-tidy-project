@@ -83,20 +83,40 @@ public class Room {
 		return checkInDate;
 	}
 
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
+
 	public Date getCheckOutDate() {
 		return checkOutDate;
+	}
+
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
 	}
 
 	public boolean isClean() {
 		return isClean;
 	}
 
+	public void setClean(boolean isClean) {
+		this.isClean = isClean;
+	}
+
 	public boolean isOccupied() {
 		return isOccupied;
 	}
 
+	public void setOccupied(boolean isOccupied) {
+		this.isOccupied = isOccupied;
+	}
+
 	public boolean isUrgent() {
 		return isUrgent;
+	}
+
+	public void setUrgent(boolean isUrgent) {
+		this.isUrgent = isUrgent;
 	}
 
 	public int getType() {
