@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ieslasgalletas.back.entity.Room;
+import com.ieslasgalletas.back.entity.User;
 import com.ieslasgalletas.back.service.RoomService;
 
 @RestController
@@ -21,6 +23,11 @@ public class RoomController {
 	@GetMapping("/rooms")
 	public List<Room> all() {
 		return roomService.listAllRooms();
+	}
+	
+	@PostMapping("/rooms")
+	public void addRoom(@RequestBody Room room) {
+		roomService.addRoom(room);
 	}
 
 	@PutMapping("/rooms/{id}")

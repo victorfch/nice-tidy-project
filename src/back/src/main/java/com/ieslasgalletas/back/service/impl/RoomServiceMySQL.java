@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ieslasgalletas.back.entity.Room;
+import com.ieslasgalletas.back.entity.User;
 import com.ieslasgalletas.back.repository.RoomRepository;
 import com.ieslasgalletas.back.service.RoomService;
 
@@ -19,6 +20,12 @@ public class RoomServiceMySQL implements RoomService {
 		return roomRepository.findAll();
 	}
 
+	@Override
+	public void addRoom(Room room) {
+		roomRepository.save(room);
+	}
+
+	
 	@Override
 	public void updateRoom(Room newRoom, int id) {
 		roomRepository.findById(id).map(room -> {
