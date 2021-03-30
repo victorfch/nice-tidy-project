@@ -1,22 +1,39 @@
 <template>
-  <div
-    class="nav vh-100 flex-column navbar-light"
+  <nav
+    class="navbar navbar-expand-lg navbar-light col-lg-3 col-sm-12"
     style="background-color: #e3f2fd"
   >
-    <li class="nav-item">
-      <router-link class="nav-link" to="/">Home</router-link>
-    </li>
-    <li class="nav-item">
-      <router-link class="nav-link" to="/habitaciones"
-        >Habitaciones</router-link
-      >
-    </li>
-    <li class="nav-item">
-      <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
-    </li>
-
-    <button class="btn btn-info mt-auto">Cerrar sesión</button>
-  </div>
+    <router-link class="navbar-brand m-2" to="/">
+      <span class="d-block d-lg-none">Nice & Tidy</span>
+    </router-link>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <router-link class="nav-link" to="/">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/habitaciones"
+            >Habitaciones</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
+        </li>
+        <button class="btn btn-info mt-auto">Cerrar sesión</button>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -26,16 +43,42 @@ export default {
 </script>
 
 <style scoped>
-.nav {
-  padding: 30px;
+nav .navbar-collapse .navbar-nav a.router-link-exact-active {
+  color: #42b983;
 }
-
-.nav a {
+nav .navbar-collapse .navbar-nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-.nav a.router-link-exact-active {
-  color: #42b983;
+@media (min-width: 990px) {
+  nav {
+    text-align: center;
+    display: flex;
+    height: 100vh;
+  }
+  nav .navbar-brand {
+    display: flex;
+    margin: auto auto 0;
+    padding: 0.5rem;
+  }
+  nav .navbar-collapse {
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 0;
+    width: 100%;
+    margin-bottom: auto;
+  }
+  nav .navbar-collapse .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+  nav .navbar-collapse .navbar-nav .nav-item,
+  nav .navbar-collapse .navbar-nav .nav-item .nav-link {
+    display: block;
+  }
+  nav .navbar-collapse .navbar-nav {
+    height: 95vh;
+  }
 }
 </style>

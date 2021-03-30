@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <navbar />
-    <div class="container mt-3">
+    <div class="container col-md-9 mt-3">
       <router-view />
     </div>
   </div>
