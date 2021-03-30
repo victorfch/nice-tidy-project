@@ -6,31 +6,32 @@
     <hr />
     <div class="row">
       <div
-        class="col-4"
+        class="col-2"
         v-for="habitacion in habitaciones"
         :key="habitacion.id"
       >
         <div class="card">
-          <div class="class-divider p-3">
+          <div class="class-divider p-2">
             <div class="num">Habitación {{ habitacion.number }}</div>
-            <div class="type" v-if="habitacion.type==1">Tipo de habitación: Individual </div>
-            <div class="type" v-else-if="habitacion.type==2">Tipo de habitación: Doble </div>
-            <div class="type" v-else-if="habitacion.type==3">Tipo de habitación: Triple </div>
-            <div class="type" v-else-if="habitacion.type==4">Tipo de habitación: Suite </div>
-            <div class="beds">{{ habitacion.bedsNumber }} camas</div>
+            <div class="type" v-if="habitacion.type==1">Individual </div>
+            <div class="type" v-else-if="habitacion.type==2">Doble </div>
+            <div class="type" v-else-if="habitacion.type==3">Triple </div>
+            <div class="type" v-else-if="habitacion.type==4">Suite </div>
+            <div class="beds" v-if="habitacion.bedsNumber==1">{{ habitacion.bedsNumber }} cama</div>
+            <div class="beds" v-if="habitacion.bedsNumber>1">{{ habitacion.bedsNumber }} camas</div>
           </div>
-          <div class="card-footer">
+          <div class="card-footer text-center">
             <button
               @click="$emit('modificar-habitacion', habitacion)"
               type="button"
-              class="btn btn-warning btn-sm text-left"
+              class="btn btn-sm text-left mr-3"
             >
               <img src="../assets/edit.png" />
             </button>
             <button
               @click="$emit('eliminar-habitacion', habitacion)"
               type="button"
-              class="btn btn-danger btn-sm text-left"
+              class="btn btn-sm text-left"
             >
               <img src="../assets/cross.png" />
             </button>
@@ -72,4 +73,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
