@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ieslasgalletas.back.entity.Room;
-import com.ieslasgalletas.back.entity.User;
 import com.ieslasgalletas.back.repository.RoomRepository;
 import com.ieslasgalletas.back.service.RoomService;
 
@@ -21,8 +20,8 @@ public class RoomServiceMySQL implements RoomService {
 	}
 
 	@Override
-	public void addRoom(Room room) {
-		roomRepository.save(room);
+	public Room addRoom(Room room) {
+		return roomRepository.save(room);
 	}
 
 	

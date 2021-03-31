@@ -45,7 +45,7 @@ public class Room {
 	@Column(name = "type")
 	private int type;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
@@ -78,7 +78,7 @@ public class Room {
 	public int getBedsNumber() {
 		return bedsNumber;
 	}
-
+	
 	public Date getCheckInDate() {
 		return checkInDate;
 	}
@@ -122,21 +122,17 @@ public class Room {
 	public int getType() {
 		return type;
 	}
-
+	
 	public String getUser_id() {
+		if (user == null) {
+			return "";
+		}
 		return user.getFullName();
 	}
 
 	@JsonIgnore
 	public User getUser() {
 		return user;
-	}
-
-	@Override
-	public String toString() {
-		return "Room [id=" + id + ", number=" + number + ", bedsNumber=" + bedsNumber + ", checkInDate=" + checkInDate
-				+ ", checkOutDate=" + checkOutDate + ", isClean=" + isClean + ", isOccupied=" + isOccupied
-				+ ", isUrgent=" + isUrgent + ", type=" + type + "]";
 	}
 
 }
