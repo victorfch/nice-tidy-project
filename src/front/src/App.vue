@@ -12,25 +12,7 @@ export default {
   components: {
     Navbar,
   },
-  data(){
-    return{
-      habitaciones: [],
-    }
-  },
-  methods:{
-    recibirHabitaciones(){
-      fetch("http://localhost:8080/rooms")
-      .then((response)=> response.json())
-      .then((data)=>{
-        console.log(data);
-        this.habitaciones = data;
-      } ); 
-    }
-  },
   name: "App",
-  mounted(){
-    this.recibirHabitaciones();
-  }
 };
 </script>
 <style>

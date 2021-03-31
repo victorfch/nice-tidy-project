@@ -13,10 +13,18 @@
         <div class="card">
           <div class="class-divider p-3">
             <div class="num">Habitación {{ habitacion.number }}</div>
-            <div class="type" v-if="habitacion.type==1">Tipo de habitación: Individual </div>
-            <div class="type" v-else-if="habitacion.type==2">Tipo de habitación: Doble </div>
-            <div class="type" v-else-if="habitacion.type==3">Tipo de habitación: Triple </div>
-            <div class="type" v-else-if="habitacion.type==4">Tipo de habitación: Suite </div>
+            <div class="type" v-if="habitacion.type == 1">
+              Tipo de habitación: Individual
+            </div>
+            <div class="type" v-else-if="habitacion.type == 2">
+              Tipo de habitación: Doble
+            </div>
+            <div class="type" v-else-if="habitacion.type == 3">
+              Tipo de habitación: Triple
+            </div>
+            <div class="type" v-else-if="habitacion.type == 4">
+              Tipo de habitación: Suite
+            </div>
             <div class="beds">{{ habitacion.bedsNumber }} camas</div>
           </div>
           <div class="card-footer">
@@ -43,7 +51,7 @@
 
 <script>
 export default {
-  name: "lista-habitaciones",
+  name: "Habitaciones",
   data() {
     return {
       habitaciones: [],
@@ -55,19 +63,19 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.habitaciones = data;
-          this.habitaciones.sort((a,b)=>{
-            if(a.number>b.number){
+          this.habitaciones.sort((a, b) => {
+            if (a.number > b.number) {
               return 1;
-            }else{
+            } else {
               return -1;
             }
-          })
+          });
         });
     },
   },
-    mounted(){
+  mounted() {
     this.recibirHabitaciones();
-  }
+  },
 };
 </script>
 

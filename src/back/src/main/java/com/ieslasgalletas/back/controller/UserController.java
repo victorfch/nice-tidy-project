@@ -37,6 +37,7 @@ public class UserController {
 		userService.deleteUser(id);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/users/{id}")
 	public Optional<User> getUser(@PathVariable int id) {
 		return userService.getUserById(id);
