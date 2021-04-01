@@ -35,8 +35,7 @@ export default {
       console.log("modificando");
     },
     eliminarUsuario(){
-      console.log(this.user.id);
-       fetch("http://localhost:8080/users/" + this.user.id,{
+      fetch("http://localhost:8080/users/" + this.user.id,{
         method:"DELETE",
       })
       .then((response)=>response.text())

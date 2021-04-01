@@ -3,6 +3,9 @@
     <h2>Nuevo usuario</h2>
     <hr />
     <div>
+      <div class="alert alert-success" v-if="exito">
+        Usuario añadido con éxito
+      </div>
       <form @submit.prevent="enviar">
         <div class="form-group">
           <label for="nickname">Nombre de usuario</label>
@@ -42,6 +45,7 @@ export default {
       password:"",
       surname:"",
       role:"",
+      exito:false,
     }
   },
   methods: {
@@ -71,10 +75,27 @@ export default {
             .then((response) => response.json())
             .then((data) => console.log(data));
       }
+      this.alertExito();
+      this.borraRegistros();
+      /* poner un alert que desaparezca a los 2 segundos -> tengo una pagina localizada */
     },
+    borraRegistros(){
+      this.name ="";
+      this.nickname ="";
+      this.password="";
+      this.role ="";
+      this.surname="";
+    },
+    alertExito(){
+      this.exito=true;
+      setTimeout(() => {
+        this.exito = false
+      }, 1000)
+    }
   },
 };
 </script>
 
 <style scoped>
+
 </style>

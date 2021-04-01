@@ -10,6 +10,9 @@
     <div class="alert alert-danger" v-if="errorNumber">
       El número de habitación introducida ya existe
     </div>
+    <div class="alert alert-success" v-if="exito">
+      Habitación añadida con éxito
+    </div>
     <form
       ref="form"
       @submit.prevent="addHab"
@@ -90,6 +93,7 @@ export default {
       selected: "1",
       errorCampos: false,
       errorNumber:false,
+      exito:false,
     };
   },
   methods: {
@@ -150,6 +154,13 @@ export default {
             .then(() => this.getHabitaciones());
         }
       }
+      this.alertExito();
+      this.borrarRegistro();
+    },
+    borrarRegistro(){
+      this.numero=undefined;
+      this.beds=undefined;
+      this.selected=undefined;
     },
     modificarHabitacion() {
       console.log("modificando...");
@@ -164,6 +175,12 @@ export default {
         this.getHabitaciones();
       })
     },
+    alertExito(){
+      this.exito=true;
+      setTimeout(() => {
+        this.exito = false
+      }, 1000)
+    }
   },
   mounted() {
     this.getHabitaciones();
