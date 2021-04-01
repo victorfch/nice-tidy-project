@@ -3,9 +3,12 @@
     <h2>Nuevo usuario</h2>
     <hr />
     <div>
-      <form @submit.prevent="enviar" ref="form">
+      <div class="alert alert-success" v-if="exito">
+        Usuario añadido con éxito
+      </div>
+      <form @submit.prevent="enviar">
         <div class="form-group">
-          <label for="username">Nombre de usuario</label>
+          <label for="nickname">Nombre de usuario</label>
           <input
             type="text"
             class="form-control"
@@ -50,32 +53,62 @@ export default {
   name: "form-usuario",
   data() {
     return {
+      errorCamposVacios: false,
       username: "",
       name: "",
       password: "",
       surname: "",
       role: "",
+      exito: false,
     };
   },
   methods: {
     enviar() {
-      const user = {
-        username: this.username,
-        password: this.password,
-        name: this.name,
-        surname: this.surname,
-        role: this.role,
-      };
-      const options = {
-        method: "post",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      fetch("http://localhost:8080/users", options)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      this.errorCamposVacios = false;
+      if (
+        this.username == "" ||
+        this.password == "" ||
+        this.name == "" ||
+        this.surname == "" ||
+        this.role == ""
+      ) {
+        this.errorCamposVacios = true;
+      }
+      if (!this.errorCamposVacios) {
+        const user = {
+          name: this.name,
+          username: this.username,
+          password: this.password,
+          role: this.role,
+          surname: this.surname,
+        };
+        const options = {
+          method: "post",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        fetch("http://localhost:8080/users", options)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      }
+      this.alertExito();
+      this.borraRegistros();
+      /* poner un alert que desaparezca a los 2 segundos -> tengo una pagina localizada */
+    },
+    borraRegistros() {
+      this.name = "";
+      this.nickname = "";
+      this.password = "";
+      this.role = "";
+      this.surname = "";
+    },
+    alertExito() {
+      this.exito = true;
+      setTimeout(() => {
+        this.exito = false;
+      }, 1000);
     },
   },
 };

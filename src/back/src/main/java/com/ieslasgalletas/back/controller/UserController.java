@@ -33,10 +33,10 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/users")
 	public User addUser(@RequestBody User user) {
-		System.out.println(user);
 		return userService.addUser(user);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		userService.deleteUser(id);

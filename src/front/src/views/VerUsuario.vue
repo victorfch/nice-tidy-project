@@ -1,12 +1,24 @@
 <template>
-  <div>
-    <h2>{{ user.nickname }}</h2>
+  <div class="col">
+    <h2 class="m-4">{{ user.username }}</h2>
     <ul>
-      <li>Nombre: {{ user.name }}</li>
-      <li>Apellidos: {{ user.surname }}</li>
-      <li>Contraseña: {{ user.password }}</li>
-      <li>Rol: {{ user.role }}</li>
+      <li class="m-2">Nombre: {{ user.name }}</li>
+      <li class="m-2">Apellidos: {{ user.surname }}</li>
+      <li class="m-2" v-if="user.password != undefined">
+        Contraseña: {{ Array(user.password.length).join("*") }}
+      </li>
+      <li class="m-2">Rol: {{ user.role }}</li>
     </ul>
+    <button @click="editarUsuario" type="button" class="btn btn-info ml-4 mt-4">
+      Editar
+    </button>
+    <button
+      @click="eliminarUsuario"
+      type="button"
+      class="btn btn-info ml-4 mt-4"
+    >
+      Eliminar
+    </button>
   </div>
 </template>
 
@@ -27,7 +39,19 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.user = data;
+        });
+    },
+    editarUsuario() {
+      console.log("modificando");
+    },
+    eliminarUsuario() {
+      fetch("http://localhost:8080/users/" + this.id, {
+        method: "DELETE",
+      })
+        .then((response) => response.text())
+        .then((data) => {
           console.log(data);
+          this.$router.go(-1);
         });
     },
   },
@@ -37,5 +61,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 </style>
