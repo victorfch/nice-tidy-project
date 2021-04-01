@@ -4,8 +4,11 @@
       <div class="col-12"><h1>Habitaciones</h1></div>
     </div>
     <hr />
-    <div class="alert alert-danger" v-if="error">
+    <div class="alert alert-danger" v-if="errorCampos">
       Debe rellenar todos los campos
+    </div>
+    <div class="alert alert-danger" v-if="errorNumber">
+      El número de habitación introducida ya existe
     </div>
     <form
       ref="form"
@@ -43,6 +46,7 @@
       <div class="d-sm-none w-100"></div>
       <button type="submit" class="btn btn-info ml-4">Añadir</button>
     </form>
+    
     <div class="card-columns">
       <div
         class="card pt-2"
@@ -84,7 +88,8 @@ export default {
       numero: "",
       beds: "",
       selected: "1",
-      error: false,
+      errorCampos: false,
+      errorNumber:false,
     };
   },
   methods: {
@@ -114,27 +119,36 @@ export default {
       }
       return "Suite";
     },
+    check(array, key, value){
+      return array.some(object => object[key]==value);
+    },
     addHab() {
-      this.error = false;
+      this.errorCampos = false;
+      this.errorNumber = false;
       if (this.numero == "" || this.beds == "") {
-        this.error = true;
+        this.errorCampos = true;
       }
-      if (!this.error) {
-        const room = {
-          number: parseInt(this.numero),
-          bedsNumber: parseInt(this.beds),
-          type: parseInt(this.selected),
-        };
-        const options = {
-          method: "post",
-          body: JSON.stringify(room),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        fetch("http://localhost:8080/rooms", options)
-          .then((response) => response.json())
-          .then(() => this.getHabitaciones());
+      if (!this.errorCampos) {
+
+        if(this.check(this.habitaciones, "number", this.numero)) {
+          this.errorNumber=true;
+        }else{
+          const room = {
+            number: parseInt(this.numero),
+            bedsNumber: parseInt(this.beds),
+            type: parseInt(this.selected),
+          };
+          const options = {
+            method: "post",
+            body: JSON.stringify(room),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+          fetch("http://localhost:8080/rooms", options)
+            .then((response) => response.json())
+            .then(() => this.getHabitaciones());
+        }
       }
     },
     modificarHabitacion() {
