@@ -46,7 +46,7 @@
       <div class="d-sm-none w-100"></div>
       <button type="submit" class="btn btn-info ml-4">Añadir</button>
     </form>
-    
+
     <div class="card-columns">
       <div
         class="card pt-2"
@@ -69,7 +69,11 @@
             <button @click="modificarHabitacion" type="button" class="btn">
               <i class="fas fa-pencil-alt"></i>
             </button>
-            <button @click="eliminarHabitacion(habitacion.id)" type="button" class="btn">
+            <button
+              @click="eliminarHabitacion(habitacion.id)"
+              type="button"
+              class="btn"
+            >
               <i class="far fa-trash-alt"></i>
             </button>
           </div>
@@ -89,7 +93,7 @@ export default {
       beds: "",
       selected: "1",
       errorCampos: false,
-      errorNumber:false,
+      errorNumber: false,
     };
   },
   methods: {
@@ -119,8 +123,8 @@ export default {
       }
       return "Suite";
     },
-    check(array, key, value){
-      return array.some(object => object[key]==value);
+    check(array, key, value) {
+      return array.some((object) => object[key] == value);
     },
     addHab() {
       this.errorCampos = false;
@@ -129,10 +133,9 @@ export default {
         this.errorCampos = true;
       }
       if (!this.errorCampos) {
-
-        if(this.check(this.habitaciones, "number", this.numero)) {
-          this.errorNumber=true;
-        }else{
+        if (this.check(this.habitaciones, "number", this.numero)) {
+          this.errorNumber = true;
+        } else {
           const room = {
             number: parseInt(this.numero),
             bedsNumber: parseInt(this.beds),
@@ -155,15 +158,11 @@ export default {
       console.log("modificando...");
     },
     eliminarHabitacion(id) {
-      fetch("http://localhost:8080/rooms/" + id,{
-        method:"DELETE",
+      fetch("http://localhost:8080/rooms/" + id, {
+        method: "DELETE",
       })
-      .then((response)=>response.text())
-      //.then(location.reload());
-      .then((data)=>{
-        console.log(data);
-        this.getHabitaciones();
-      })
+        .then((response) => response.text())
+        .then(() => this.getHabitaciones());
     },
   },
   mounted() {

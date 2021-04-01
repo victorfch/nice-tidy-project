@@ -18,8 +18,9 @@ public class User {
 	@GeneratedValue
 	private int id;
 
-	@Column(name = "nickname")
-	private String nickname;
+	
+	@Column(name = "username", unique = true, nullable = false, length = 45)
+	private String username;
 
 	@Column(name = "name")
 	private String name;
@@ -30,7 +31,7 @@ public class User {
 	@Column(name = "role")
 	private String role;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false, length = 60)
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -39,10 +40,10 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String nickname, String name, String surname, String role, String password) {
+	public User(int id, String username, String name, String surname, String role, String password) {
 		super();
 		this.id = id;
-		this.nickname = nickname;
+		this.username = username;
 		this.name = name;
 		this.surname = surname;
 		this.role = role;
@@ -53,8 +54,8 @@ public class User {
 		return id;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getUsername() {
+		return username;
 	}
 
 	public String getName() {
@@ -72,6 +73,10 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public List<Room> getRooms() {
 		return rooms;
@@ -84,7 +89,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nickname=" + nickname + ", name=" + name + ", surname=" + surname + ", role="
+		return "User [id=" + id + ", username=" + username + ", name=" + name + ", surname=" + surname + ", role="
 				+ role + ", password=" + password + "]";
 	}
 }
