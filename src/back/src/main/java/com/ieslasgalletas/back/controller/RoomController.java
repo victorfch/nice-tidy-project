@@ -36,6 +36,7 @@ public class RoomController {
 		return roomService.addRoom(room);
 	}
 
+	@CrossOrigin
 	@PutMapping("/rooms/{id}")
 	public void updateRoom(@RequestBody Room newRoom, @PathVariable int id) {
 		roomService.updateRoom(newRoom, id);

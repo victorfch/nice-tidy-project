@@ -159,7 +159,6 @@ export default {
         method:"DELETE",
       })
       .then((response)=>response.text())
-      //.then(location.reload());
       .then((data)=>{
         console.log(data);
         this.getHabitaciones();

@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.ieslasgalletas.back.entity.User;
 
 public interface UserService {
-	public abstract void addUser(User user);
+	public abstract User addUser(User user);
 
 	public abstract void deleteUser(int id);
 

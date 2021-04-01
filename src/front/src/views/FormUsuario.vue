@@ -6,23 +6,23 @@
       <form @submit.prevent="enviar">
         <div class="form-group">
           <label for="nickname">Nombre de usuario</label>
-          <input type="text" class="form-control" id="nickname" />
+          <input type="text" class="form-control" v-model="nickname" id="nickname" />
         </div>
         <div class="form-group">
           <label for="password">Contraseña</label>
-          <input type="password" class="form-control" id="password" />
+          <input type="password" class="form-control" v-model="password" id="password" />
         </div>
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" class="form-control" id="name" />
+          <input type="text" class="form-control" v-model="name" id="name" />
         </div>
         <div class="form-group">
           <label for="surname">Apellidos</label>
-          <input type="text" class="form-control" id="surname" />
+          <input type="text" class="form-control" v-model="surname" id="surname" />
         </div>
         <div class="form-group">
           <label for="role">Rol</label>
-          <input type="text" class="form-control" id="role" />
+          <input type="text" class="form-control" v-model="role" id="role" />
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
@@ -31,11 +31,46 @@
 </template>
 
 <script>
+import md5 from 'js-md5'
 export default {
   name: "form-usuario",
+  data(){
+    return{
+      errorCamposVacios:false,
+      nickname:"",
+      name:"",
+      password:"",
+      surname:"",
+      role:"",
+    }
+  },
   methods: {
     enviar() {
       console.log("enviar");
+      this.errorCamposVacios=false;
+      if(this.nickname == "" || this.password == "" || this.name == "" || this.surname == "" || this.role == ""){
+        this.errorCamposVacios = true;
+      }
+      if(!this.errorCamposVacios){
+        const user = {
+            name: this.name,
+            nickname: this.nickname,
+            password: md5(this.password),
+            role:this.role,
+            surname:this.surname,
+          };
+          console.log(user);
+          const options = {
+            method: "post",
+            body: JSON.stringify(user),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+          fetch("http://localhost:8080/users", options)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+      }
     },
   },
 };
