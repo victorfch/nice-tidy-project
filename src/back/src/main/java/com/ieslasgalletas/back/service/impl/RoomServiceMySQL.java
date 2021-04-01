@@ -46,4 +46,9 @@ public class RoomServiceMySQL implements RoomService {
 			return roomRepository.save(room);
 		});
 	}
+	
+	@Override
+	public void deleteRoom(int id) {
+		roomRepository.deleteById(id);
+	}
 }

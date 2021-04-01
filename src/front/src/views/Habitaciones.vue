@@ -69,7 +69,7 @@
             <button @click="modificarHabitacion" type="button" class="btn">
               <i class="fas fa-pencil-alt"></i>
             </button>
-            <button @click="eliminarHabitacion" type="button" class="btn">
+            <button @click="eliminarHabitacion(habitacion.id)" type="button" class="btn">
               <i class="far fa-trash-alt"></i>
             </button>
           </div>
@@ -154,8 +154,12 @@ export default {
     modificarHabitacion() {
       console.log("modificando...");
     },
-    eliminarHabitacion() {
+    eliminarHabitacion(id) {
       console.log("eliminando...");
+      console.log("id: "+id);
+      fetch("http://localhost:8080/rooms/" + id)
+      .then((response)=>response.json())
+      .then(this.getHabitaciones());
     },
   },
   mounted() {
