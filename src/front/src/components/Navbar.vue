@@ -30,7 +30,9 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
         </li>
-        <button class="btn btn-info mt-auto">Cerrar sesión</button>
+        <button @click="logout" class="btn btn-info mt-auto">
+          Cerrar sesión
+        </button>
       </ul>
     </div>
   </nav>
@@ -39,6 +41,12 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    logout() {
+      localStorage.removeItem("login");
+      this.$router.go();
+    },
+  },
 };
 </script>
 

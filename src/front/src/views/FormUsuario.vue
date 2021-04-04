@@ -91,18 +91,11 @@ export default {
         };
         fetch("http://localhost:8080/users", options)
           .then((response) => response.json())
-          .then((data) => console.log(data));
+          .then(() => {
+            this.alertExito();
+            setTimeout(() => this.$router.go(-1), 2500);
+          });
       }
-      this.alertExito();
-      this.borraRegistros();
-      /* poner un alert que desaparezca a los 2 segundos -> tengo una pagina localizada */
-    },
-    borraRegistros() {
-      this.name = "";
-      this.nickname = "";
-      this.password = "";
-      this.role = "";
-      this.surname = "";
     },
     alertExito() {
       this.exito = true;

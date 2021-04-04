@@ -1,17 +1,15 @@
 <template>
-  <div class="habitaciones">
-    <div class="row">
-      <div class="col-12"><h1>Habitaciones</h1></div>
-    </div>
+  <div>
+    <h1>Habitaciones</h1>
     <hr />
-    <div class="alert alert-danger" v-if="errorCampos">
-      Debe rellenar todos los campos
-    </div>
     <div class="alert alert-danger" v-if="errorNumber">
       El número de habitación introducida ya existe
     </div>
     <div class="alert alert-success" v-if="exito">
       Habitación añadida con éxito
+    </div>
+    <div class="alert alert-danger" v-if="errorCampos">
+      Debe rellenar todos los campos
     </div>
     <form
       ref="form"
@@ -92,12 +90,12 @@ export default {
   data() {
     return {
       habitaciones: [],
-      numero: "",
-      beds: "",
-      selected: "1",
-      errorCampos: false,
       errorNumber: false,
       exito: false,
+      numero: "",
+      beds: "",
+      selected: 1,
+      errorCampos: false,
     };
   },
   methods: {
@@ -163,7 +161,7 @@ export default {
     borrarRegistro() {
       this.numero = undefined;
       this.beds = undefined;
-      this.selected = undefined;
+      this.selected = 1;
     },
     modificarHabitacion() {
       console.log("modificando...");

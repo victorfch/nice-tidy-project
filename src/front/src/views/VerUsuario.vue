@@ -45,12 +45,11 @@ export default {
       console.log("modificando");
     },
     eliminarUsuario() {
-      fetch("http://localhost:8080/users/" + this.id, {
+      fetch(`http://localhost:8080/users/${this.user.id}`, {
         method: "DELETE",
       })
         .then((response) => response.text())
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           this.$router.go(-1);
         });
     },
