@@ -17,26 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ieslasgalletas.back.entity.Room;
 import com.ieslasgalletas.back.service.RoomService;
 
+@CrossOrigin
 @RestController
 public class RoomController {
 
 	@Autowired
 	private RoomService roomService;
 
-	@CrossOrigin
 	@GetMapping("/rooms")
 	public List<Room> all() {
 		return roomService.listAllRooms();
 	}
 	
-	@CrossOrigin
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/rooms")
 	public Room addRoom(@RequestBody Room room) {
 		return roomService.addRoom(room);
 	}
 
-	@CrossOrigin
 	@PutMapping("/rooms/{id}")
 	public void updateRoom(@RequestBody Room newRoom, @PathVariable int id) {
 		roomService.updateRoom(newRoom, id);
@@ -47,7 +45,6 @@ public class RoomController {
 		roomService.deleteReservation(id);
 	}
 	
-	@CrossOrigin
 	@DeleteMapping("/rooms/{id}")
 	public void deleteRoom(@PathVariable int id) {
 		roomService.deleteRoom(id);

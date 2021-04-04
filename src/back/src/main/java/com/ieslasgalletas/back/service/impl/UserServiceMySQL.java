@@ -8,7 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ieslasgalletas.back.configuration.AuthenticationRequest;
 import com.ieslasgalletas.back.entity.User;
+import com.ieslasgalletas.back.exception.UserNotFoundException;
+import com.ieslasgalletas.back.exception.UsernameExistException;
 import com.ieslasgalletas.back.repository.UserRepository;
 import com.ieslasgalletas.back.service.UserService;
 
@@ -17,18 +20,23 @@ public class UserServiceMySQL implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncode;
 	
 	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+	public BCryptPasswordEncoder bCryptPasswordEncode() {
 	    return new BCryptPasswordEncoder();
 	}
 
 	@Override
 	public User addUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		return userRepository.save(user);
+		user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
+		try {
+			return userRepository.save(user);			
+		} catch (Exception e) {
+			throw new UsernameExistException();
+		}
 	}
 
 	@Override
@@ -42,8 +50,24 @@ public class UserServiceMySQL implements UserService {
 	}
 
 	@Override
-	public Optional<User> getUserById(int id) {
-		return userRepository.findById(id);
+	public User getUserById(int id) {
+		return userRepository.findById(id)
+				.orElseThrow(() -> new UserNotFoundException());
 	}
 
+	@Override
+	public User getByUsername(AuthenticationRequest request) {
+		System.out.println(request.getPassword());
+		System.out.println(request.getUsername());
+		User user = userRepository.findByUsername(request.getUsername());
+		if (bCryptPasswordEncode.matches(request.getPassword(), user.getPassword())) {
+			System.out.println("son iguales");
+		} else {
+			System.out.println("no son iguales");
+		}
+		
+		return user;
+	}
+
+	
 }
