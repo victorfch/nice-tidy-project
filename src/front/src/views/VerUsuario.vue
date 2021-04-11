@@ -19,6 +19,7 @@
     >
       Eliminar
     </button>
+    <button @click="volver"  type="button" class="btn btn-info ml-4 mt-4">Volver</button>
   </div>
 </template>
 
@@ -53,6 +54,9 @@ export default {
           this.$router.go(-1);
         });
     },
+    volver(){
+      this.$router.go(-1);
+    }
   },
   mounted() {
     this.getUser(this.id);
