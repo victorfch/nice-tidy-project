@@ -1,4 +1,7 @@
 <template>
+  <div class="alert alert-danger" v-if="error">
+    {{ errorMessage }}
+  </div>
   <div>
     <input type="text" v-model="username" placeholder="nombre de usuario" />
     <input type="text" v-model="password" placeholder="contraseña" />
@@ -11,6 +14,8 @@ export default {
   name: "Login",
   data() {
     return {
+      error: false,
+      errorMessage: "",
       username: "",
       password: "",
     };
@@ -31,9 +36,14 @@ export default {
       fetch("http://localhost:8080/login", options)
         .then((response) => response.json())
         .then((data) => {
-          localStorage.login = JSON.stringify(data);
-          console.log(data);
-          this.$router.go();
+          if (data.status == 404) {
+            this.error = true;
+            this.errorMessage = data.message;
+          } else {
+            localStorage.login = JSON.stringify(data);
+            console.log(data);
+            this.$router.go();
+          }
         });
     },
   },

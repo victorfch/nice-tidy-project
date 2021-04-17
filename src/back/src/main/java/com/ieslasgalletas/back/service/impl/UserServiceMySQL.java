@@ -1,8 +1,6 @@
 package com.ieslasgalletas.back.service.impl;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -57,14 +55,13 @@ public class UserServiceMySQL implements UserService {
 
 	@Override
 	public User getByUsername(AuthenticationRequest request) {
-		System.out.println(request.getPassword());
-		System.out.println(request.getUsername());
 		User user = userRepository.findByUsername(request.getUsername());
-		if (bCryptPasswordEncode.matches(request.getPassword(), user.getPassword())) {
-			System.out.println("son iguales");
-		} else {
-			System.out.println("no son iguales");
+		if (user == null) {
+			throw new UserNotFoundException();
 		}
+		if (!bCryptPasswordEncode.matches(request.getPassword(), user.getPassword())) {
+			throw new UserNotFoundException();
+		} 
 		
 		return user;
 	}
