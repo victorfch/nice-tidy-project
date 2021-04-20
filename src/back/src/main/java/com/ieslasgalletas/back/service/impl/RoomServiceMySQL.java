@@ -1,5 +1,6 @@
 package com.ieslasgalletas.back.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class RoomServiceMySQL implements RoomService {
 	@Override
 	public List<Room> listAllRooms() {
 		return roomRepository.findAll();
+	}
+	
+	@Override
+	public List<Room> listAllReservations() {
+		return roomRepository.getReserves();
 	}
 
 	@Override

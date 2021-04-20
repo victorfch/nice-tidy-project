@@ -29,6 +29,11 @@ public class RoomController {
 		return roomService.listAllRooms();
 	}
 	
+	@GetMapping("/reserves")
+	public List<Room> getReservations() {
+		return roomService.listAllReservations();
+	}
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/rooms")
 	public Room addRoom(@RequestBody Room room) {

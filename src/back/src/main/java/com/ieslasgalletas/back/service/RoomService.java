@@ -7,6 +7,8 @@ import com.ieslasgalletas.back.entity.Room;
 public interface RoomService {
 	public abstract List<Room> listAllRooms();
 	
+	public abstract List<Room> listAllReservations();
+	
 	public abstract Room addRoom(Room room);
 
 	public abstract void updateRoom(Room newRoom, int id);
