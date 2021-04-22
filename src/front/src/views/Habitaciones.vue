@@ -7,11 +7,12 @@
         </div>
     <form-habitaciones :habitaciones="habitaciones" />
 
-    <div class="card-columns">
+    <div class="container flex-wrap justify-content-start" style="display:flex;">
       <div
-        class="card pt-2"
+        class="card pt-2 m-3"
         v-for="habitacion in habitaciones"
         :key="habitacion.id"
+        style="width:29%"
       >
         <div class="class-divider">
           <div class="ml-5">

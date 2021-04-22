@@ -5,7 +5,7 @@
     </div>
     <div class="text-container">
       <input type="text" v-model="username" placeholder="nombre de usuario" />
-      <input type="text" v-model="password" placeholder="contraseña" />
+      <input type="password" v-model="password" placeholder="contraseña" />
       <button @click="send">Enviar</button>
     </div>
     <div class="alert alert-danger" v-if="error">
