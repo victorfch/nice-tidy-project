@@ -22,14 +22,21 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/reservas">Reservas</router-link>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
+        </li>
+
         <li class="nav-item">
           <router-link class="nav-link" to="/habitaciones"
             >Habitaciones</router-link
           >
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
-        </li>
+
         <button @click="logout" class="btn btn-info mt-auto">
           Cerrar sesión
         </button>

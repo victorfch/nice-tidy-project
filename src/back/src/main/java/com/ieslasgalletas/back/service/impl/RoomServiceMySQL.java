@@ -1,6 +1,5 @@
 package com.ieslasgalletas.back.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,6 @@ public class RoomServiceMySQL implements RoomService {
 		roomRepository.findById(id).map(room -> {
 			room.setCheckInDate(null);
 			room.setCheckOutDate(null);
-			room.setClean(true);
 			room.setUrgent(false);
 			room.setOccupied(false);
 			return roomRepository.save(room);

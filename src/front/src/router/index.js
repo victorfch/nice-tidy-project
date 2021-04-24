@@ -4,6 +4,7 @@ import Usuarios from '../views/Usuarios.vue'
 import Habitaciones from '../views/Habitaciones.vue'
 import VerUsuario from '../views/VerUsuario.vue'
 import FormUsuario from '../views/FormUsuario.vue'
+import Reservas from '../views/Reservas.vue'
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios
+  },
+  {
+    path: '/reservas',
+    name: 'Reservas',
+    component: Reservas
   },
   {
     path: '/nuevo-usuario',
