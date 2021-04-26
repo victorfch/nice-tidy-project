@@ -1,10 +1,17 @@
 package com.ieslasgalletas.back.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ieslasgalletas.back.configuration.AuthenticationRequest;
 import com.ieslasgalletas.back.entity.User;
@@ -36,7 +43,23 @@ public class UserServiceMySQL implements UserService {
 			throw new UsernameExistException();
 		}
 	}
-
+	
+	
+	//modifica el password
+	@Override
+	public ResponseEntity<User> updateUser(int id, User user) {
+		Optional<User> opUser = userRepository.findById(id);
+		if(opUser.isPresent()) {
+			User updatedUser = opUser.get();
+			if(user.getPassword() != null) {
+				updatedUser.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
+			}
+			return new ResponseEntity<>(userRepository.save(updatedUser), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@Override
 	public void deleteUser(int id) {
 		userRepository.deleteById(id);

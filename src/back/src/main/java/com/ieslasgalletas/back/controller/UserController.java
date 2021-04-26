@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +45,11 @@ public class UserController {
 	public User addUser(@RequestBody User user) {
 		return userService.addUser(user);
 	}
+	
+    @PatchMapping("/users/update/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
+        return userService.updateUser(id, user);
+    }
 	
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
