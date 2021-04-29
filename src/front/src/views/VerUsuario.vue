@@ -5,20 +5,13 @@
       <li class="m-2">Nombre: {{ user.name }}</li>
       <li class="m-2">Apellidos: {{ user.surname }}</li>
       <li class="m-2" v-if="user.password != undefined">
-        Contraseña: {{ Array(user.password.length).join("*") }}
+        Contraseña: ********
+        <!-- Contraseña: {{ Array(user.password.length).join("*") }} (no coindice con length real) -->
       </li>
       <li class="m-2">Rol: {{ user.role }}</li>
     </ul>
-    <button @click="editarUsuario" type="button" class="btn btn-info ml-4 mt-4">
-      Editar
-    </button>
-    <button
-      @click="eliminarUsuario"
-      type="button"
-      class="btn btn-info ml-4 mt-4"
-    >
-      Eliminar
-    </button>
+    <button @click="editarUsuario" type="button" class="btn btn-info ml-4 mt-4">Editar</button>
+    <button @click="eliminarUsuario" type="button" class="btn btn-info ml-4 mt-4">Eliminar</button>
     <button @click="volver"  type="button" class="btn btn-info ml-4 mt-4">Volver</button>
   </div>
 </template>
