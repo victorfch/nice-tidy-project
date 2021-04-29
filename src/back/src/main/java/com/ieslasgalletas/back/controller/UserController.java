@@ -25,7 +25,7 @@ public class UserController {
 		return userService.getUsers();
 	}
 	
-	@CrossOrigin
+	//@CrossOrigin
 	@PostMapping("/login")
 	public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 		User user = userService.getByUsername(authenticationRequest);
@@ -37,7 +37,7 @@ public class UserController {
 	public User addUser(@RequestBody User user) {
 		return userService.addUser(user);
 	}
-	
+
     @PutMapping("/users/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         return userService.updateUser(id, user);

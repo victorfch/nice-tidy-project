@@ -4,8 +4,8 @@
       <img src="@/assets/logo.png" alt="logo" class="image">
     </div>
     <div class="text-container">
-      <input type="text" v-model="username" placeholder="nombre de usuario" />
-      <input type="password" v-model="password" placeholder="contraseña" />
+      <input type="text" v-on:keyup.enter="send" v-model="username" placeholder="nombre de usuario" />
+      <input type="password" v-on:keyup.enter="send" v-model="password" placeholder="contraseña" />
       <button @click="send">Enviar</button>
     </div>
     <div class="alert alert-danger" v-if="error">
