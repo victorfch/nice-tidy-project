@@ -4,16 +4,18 @@
     <hr />
     <div>
       <div class="alert alert-success" v-if="exito">
-        Usuario añadido con éxito
+        Usuario {{ id ? "editado" : "añadido" }} con éxito
       </div>
       <form @submit.prevent="enviar">
+        <input type="hidden" v-model="user.id" />
         <div class="form-group">
-          <label for="nickname">Nombre de usuario</label>
+          <label for="username">Nombre de usuario</label>
           <input
             type="text"
             class="form-control"
-            v-model="username"
+            v-model="user.username"
             id="username"
+            required
           />
         </div>
         <div class="form-group">
@@ -21,28 +23,48 @@
           <input
             type="password"
             class="form-control"
-            v-model="password"
+            v-model="user.password"
             id="password"
+            required
           />
         </div>
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" class="form-control" v-model="name" id="name" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="user.name"
+            id="name"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="surname">Apellidos</label>
           <input
             type="text"
             class="form-control"
-            v-model="surname"
+            v-model="user.surname"
             id="surname"
+            required
           />
         </div>
         <div class="form-group">
           <label for="role">Rol</label>
-          <input type="text" class="form-control" v-model="role" id="role" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="user.role"
+            id="role"
+            required
+          />
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <button
+          @click="$router.replace('/usuarios')"
+          class="btn btn-secondary ml-4"
+        >
+          Cancelar
+        </button>
       </form>
     </div>
   </div>
@@ -53,49 +75,37 @@ export default {
   name: "form-usuario",
   data() {
     return {
-      errorCamposVacios: false,
-      username: "",
-      name: "",
-      password: "",
-      surname: "",
-      role: "",
+      user: {},
       exito: false,
     };
   },
+  props: {
+    id: String,
+  },
+  mounted() {
+    this.id &&
+      fetch(`http://localhost:8080/users/${this.id}`)
+        .then((response) => response.json())
+        .then((data) => (this.user = data));
+  },
   methods: {
     enviar() {
-      this.errorCamposVacios = false;
-      if (
-        this.username == "" ||
-        this.password == "" ||
-        this.name == "" ||
-        this.surname == "" ||
-        this.role == ""
-      ) {
-        this.errorCamposVacios = true;
-      }
-      if (!this.errorCamposVacios) {
-        const user = {
-          name: this.name,
-          username: this.username,
-          password: this.password,
-          role: this.role,
-          surname: this.surname,
-        };
-        const options = {
-          method: "post",
-          body: JSON.stringify(user),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        fetch("http://localhost:8080/users", options)
-          .then((response) => response.json())
-          .then(() => {
-            this.alertExito();
-            setTimeout(() => this.$router.go(-1), 2500);
-          });
-      }
+      const options = {
+        method: "post",
+        body: JSON.stringify(this.user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const url = this.id
+        ? `http://localhost:8080/users/${this.id}`
+        : "http://localhost:8080/users";
+      fetch(url, options)
+        .then((response) => response.json())
+        .then(() => {
+          this.alertExito();
+          setTimeout(() => this.$router.go(-1), 2500);
+        });
     },
     alertExito() {
       this.exito = true;

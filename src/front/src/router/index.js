@@ -26,7 +26,12 @@ const routes = [
     path: '/nuevo-usuario',
     name: 'form-usuario',
     component: FormUsuario
-
+  },
+  {
+    path: '/edit-user/:id',
+    name: 'edit-usuario',
+    component: FormUsuario,
+    props: true
   },
   {
     path: '/habitaciones',

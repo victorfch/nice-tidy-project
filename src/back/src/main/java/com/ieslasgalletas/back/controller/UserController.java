@@ -38,8 +38,9 @@ public class UserController {
 		return userService.addUser(user);
 	}
 
-    @PutMapping("/users/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
+	@ResponseStatus(HttpStatus.OK)
+    @PostMapping("/users/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User user){
         return userService.updateUser(id, user);
     }
 	

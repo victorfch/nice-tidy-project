@@ -19,6 +19,6 @@ public interface UserService {
 	
 	public abstract User getByUsername(AuthenticationRequest request);
 	
-	public abstract ResponseEntity<User> updateUser(int id, User user);
+	public abstract User updateUser(int id, User user);
 
 }

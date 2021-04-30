@@ -45,21 +45,15 @@ public class UserServiceMySQL implements UserService {
 	}
 	
 	
-	//modifica el usuario salvo id
 	@Override
-	public ResponseEntity<User> updateUser(int id, User user) {
+	public User updateUser(int id, User user) {
 		Optional<User> opUser = userRepository.findById(id);
+		
 		if(opUser.isPresent()) {
-			User updatedUser = opUser.get();
-			if(user.getUsername() != null) { updatedUser.setUsername(user.getUsername()); }
-			if(user.getName() != null) { updatedUser.setName(user.getName()); }
-			if(user.getSurname() != null) { updatedUser.setSurname(user.getSurname()); }
-			if(user.getRole() != null) { updatedUser.setRole(user.getRole()); }
-			if(user.getPassword() != null) { updatedUser.setPassword(bCryptPasswordEncode.encode(user.getPassword())); }
-			return new ResponseEntity<>(userRepository.save(updatedUser), HttpStatus.OK);
-		}else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
+			return userRepository.save(user);
 		}
+		throw new UserNotFoundException();
 	}
 	
 	@Override
