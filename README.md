@@ -5,12 +5,16 @@ Proyecto para la administración de la limpieza de habitaciones de los hoteles
 
 ## Resumen
 En los establecimientos hoteleros, a día de hoy, el control de limpieza de las habitaciones entre el check-out y el siguiente check-in es difícil de organizar. 
+
 Nuestro objetivo principal es crear una aplicación web responsive que agilice la comunicación entre camareros de piso y recepción, consiguiendo así que la información del estado de las habitaciones llegue de manera inmediata. Para ello las camareras de piso dispondrán de un listado con las habitaciones que deben limpiar ese día y al chequearlas como limpias, la información se actualizará en recepción.
+
 De esta forma, conseguiremos facilitar la labor de recepción a la hora de indicar a los clientes cuándo pueden ocupar su habitación.
 
 ## Abstract
 In hotel establishments nowadays, controlling room service between check-out and the next check-in is difficult to organize.
+
 Our main objective is to create a responsive web application that streamlines communication between chambermaids and reception, thus ensuring that the information on the status of the rooms arrives immediately. For this, the chambermaids will have a list of the rooms that must be cleaned that day. Once they’re checked off as cleaned, the information will be updated at the reception.
+
 This way we will be able to facilitate reception work when it comes to telling customers when they can occupy their room.
 
 
