@@ -36,6 +36,11 @@
             >Habitaciones</router-link
           >
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/camarera"
+            >Camarera</router-link
+          >
+        </li>
 
         <button @click="logout" class="btn btn-info mt-auto">
           Cerrar sesión

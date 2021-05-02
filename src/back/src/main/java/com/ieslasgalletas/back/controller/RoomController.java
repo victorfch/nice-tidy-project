@@ -2,6 +2,8 @@ package com.ieslasgalletas.back.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,6 +34,11 @@ public class RoomController {
 	@GetMapping("/reserves")
 	public List<Room> getReservations() {
 		return roomService.listAllReservations();
+	}
+
+	@GetMapping("/reserve/{id}")
+	public List<Room> getReservationsByUser(@PathVariable Integer id){
+		return roomService.listAllRoomsByUser(id);
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)

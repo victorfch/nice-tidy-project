@@ -8,6 +8,10 @@
       <input type="password" v-on:keyup.enter="send" v-model="password" placeholder="contraseña" />
       <button @click="send">Enviar</button>
     </div>
+    <div class="red" @click="messageOn">¿Olvidaste la contraseña?</div>
+    <div class="alert alert-info" v-if="message">
+      Para recuperar la contraseña, ponte en contacto con el mánager
+    </div>
     <div class="alert alert-danger" v-if="error">
       {{ errorMessage }}
     </div>
@@ -23,9 +27,14 @@ export default {
       errorMessage: "",
       username: "",
       password: "",
+      message: false,
     };
   },
   methods: {
+    messageOn(){
+      this.error=false;
+     this.message=true;
+    },
     send() {
       const user = {
         username: this.username,
@@ -43,6 +52,7 @@ export default {
         .then((data) => {
           if (data.status == 404) {
             this.error = true;
+            this.message=false;
             this.errorMessage = data.message;
           } else {
             localStorage.login = JSON.stringify(data);
@@ -56,6 +66,15 @@ export default {
 </script>
 
 <style scoped>
+
+.red{
+  color: red;
+  font-size: 14px;
+}
+
+.red:hover{
+  cursor: pointer;
+}
 
 .container{
   display: flex;

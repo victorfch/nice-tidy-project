@@ -5,6 +5,7 @@ import Habitaciones from '../views/Habitaciones.vue'
 import VerUsuario from '../views/VerUsuario.vue'
 import FormUsuario from '../views/FormUsuario.vue'
 import Reservas from '../views/Reservas.vue'
+import Camarera from '../views/Camarera.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     name: 'ver-usuario',
     component: VerUsuario,
     props: true
+  },
+  {
+    path: '/camarera',
+    name: 'Camarera',
+    component: Camarera
   },
 ]
 

@@ -29,7 +29,7 @@ public class UserController {
 	@PostMapping("/login")
 	public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 		User user = userService.getByUsername(authenticationRequest);
-		return new AuthenticationResponse(user.getFullName(), user.getRole());
+		return new AuthenticationResponse(user.getFullName(), user.getRole(), user.getId());
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
