@@ -2,6 +2,27 @@
   <div>
     <h1>Reservas</h1>
     <hr />
+    <p>
+      <button
+        class="btn btn-primary ml-3"
+        data-toggle="collapse"
+        ref="btn_new"
+        data-target="#collapseForm"
+      >
+        <i class="fas fa-plus mr-1"></i>
+        Nueva
+      </button>
+    </p>
+    <div class="collapse ml-3" id="collapseForm">
+      <label for="number">Numero: </label>
+      <input type="number" id="number" v-model="reserve.number" /> <br />
+      <label for="checkin">Fecha checkin:</label>
+      <input type="date" id="checkin" v-model="reserve.checkInDate" /> <br />
+      <label for="checkout">Fecha checkout:</label>
+      <input type="date" id="checkout" v-model="reserve.checkOutDate" /> <br />
+      <button class="btn btn-info mt-4" @click="newReserva">Guardar</button>
+    </div>
+
     <div class="reservas">
       <div class="reserva" v-for="reserva in reservas" :key="reserva.id">
         <h2>Habitación {{ reserva.number }} {{ bedType(reserva.type) }}</h2>
@@ -18,19 +39,18 @@
           Limpia
         </span>
         <span>
-          <input
-            type="checkbox"
-            @change="reserva.occupied = !reserva.occupied"
-            :checked="reserva.occupied"
-            id="clean"
-          />
+          <input type="checkbox" v-model="reserva.occupied" id="clean" />
           Ocupada
         </span>
         <span>
-          <button @click="actualizar(reserva)">Actualizar</button>
+          <button class="btn btn-success" @click="actualizar(reserva)">
+            Actualizar
+          </button>
         </span>
         <span>
-          <button @click="eliminarReserva(reserva.id)">Eliminar reserva</button>
+          <button class="btn btn-danger" @click="eliminarReserva(reserva.id)">
+            Eliminar reserva
+          </button>
         </span>
       </div>
     </div>
@@ -42,10 +62,27 @@ export default {
   name: "Reservas",
   data() {
     return {
+      reserve: {},
       reservas: [],
     };
   },
   methods: {
+    newReserva() {
+      const options = {
+        method: "post",
+        body: JSON.stringify(this.reserve),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      fetch(`http://localhost:8080/reserves`, options)
+        .then((res) => res.json())
+        .then(() => {
+          this.$refs.btn_new.click();
+          this.getReservas();
+          this.reserve = {};
+        });
+    },
     actualizar(reserva) {
       const options = {
         method: "post",
@@ -90,5 +127,12 @@ export default {
 }
 span {
   margin: 1em;
+}
+
+.collapse {
+  width: 71vw;
+  padding: 1em;
+  /*border: 0.1em solid black;*/
+  box-shadow: 2px 2px 2px 2px rgb(98, 98, 98);
 }
 </style>

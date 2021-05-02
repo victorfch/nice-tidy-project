@@ -50,6 +50,11 @@ public class RoomController {
 	public Room updateRoom(@RequestBody Room newRoom, @PathVariable int id) {
 		return roomService.updateRoom(newRoom, id);
 	}
+	
+	@PostMapping("/reserves")
+	public Room newReserve(@RequestBody Room newReserve) {
+		return roomService.addReserve(newReserve);
+	}
 
 	@DeleteMapping("/reserve/{id}")
 	public void deleteReservation(@PathVariable int id) {

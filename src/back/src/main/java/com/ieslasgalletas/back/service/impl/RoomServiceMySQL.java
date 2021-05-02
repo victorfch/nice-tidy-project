@@ -45,7 +45,6 @@ public class RoomServiceMySQL implements RoomService {
 	
 	@Override
 	public Room updateRoom(Room newRoom, int id) {
-		System.out.println(newRoom);
 		Optional<Room> room = roomRepository.findById(id);
 		if (!room.isPresent()) {
 			throw new RoomNotFound();
@@ -69,4 +68,15 @@ public class RoomServiceMySQL implements RoomService {
 		roomRepository.deleteById(id);
 	}
 
+	@Override
+	public Room addReserve(Room newReserve) {
+		Integer number = newReserve.getNumber();
+		Room room = roomRepository.findByNumber(number);
+		if (room == null) {
+			throw new RoomNotFound();
+		}
+		room.setCheckInDate(newReserve.getCheckInDate());
+		room.setCheckOutDate(newReserve.getCheckOutDate());
+		return roomRepository.save(room);
+	}
 }

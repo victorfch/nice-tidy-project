@@ -19,4 +19,7 @@ public interface RoomRepository extends JpaRepository<Room, Serializable> {
 	@Query(value = "SELECT * FROM rooms r WHERE r.user_id = :id", nativeQuery = true)
 	public abstract List<Room> getRoomsByUser(@Param("id") Integer id);
 
+	@Query(value = "SELECT * from rooms WHERE number = :number", nativeQuery = true)
+	public abstract Room findByNumber(@Param("number") Integer number);
+
 }

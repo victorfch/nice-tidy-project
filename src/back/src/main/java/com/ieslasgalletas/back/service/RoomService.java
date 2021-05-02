@@ -18,4 +18,7 @@ public interface RoomService {
 	public abstract void deleteRoom(int id);
 
 	public abstract List<Room> listAllRoomsByUser(Integer id);
+
+	public abstract Room addReserve(Room newReserve);
+
 }

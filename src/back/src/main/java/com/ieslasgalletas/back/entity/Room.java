@@ -21,7 +21,7 @@ public class Room {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "number")
+	@Column(name = "number", unique = true)
 	private int number;
 
 	@Column(name = "beds_number")
