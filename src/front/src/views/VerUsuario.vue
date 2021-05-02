@@ -15,7 +15,15 @@
         <span>********</span>
       </li>
       <li class="m-2">
-        Rol: <span>{{ user.role }}</span>
+        Rol:
+        <span>
+          <select id="role" v-model="user.role" disabled>
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_RECEPCIONIST">RECEPCIONISTA</option>
+            <option value="ROLE_CHAMBERMAIDS">CAMARERO DE PISO</option>
+            <option value="ROLE_GOVER">GOBERNANTA</option>
+          </select>
+        </span>
       </li>
     </ul>
 

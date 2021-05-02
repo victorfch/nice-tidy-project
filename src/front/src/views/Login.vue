@@ -1,11 +1,21 @@
 <template>
   <div class="container">
     <div class="image-container">
-      <img src="@/assets/logo.png" alt="logo" class="image">
+      <img src="@/assets/logo.png" alt="logo" class="image" />
     </div>
     <div class="text-container">
-      <input type="text" v-on:keyup.enter="send" v-model="username" placeholder="nombre de usuario" />
-      <input type="password" v-on:keyup.enter="send" v-model="password" placeholder="contraseña" />
+      <input
+        type="text"
+        v-on:keyup.enter="send"
+        v-model="username"
+        placeholder="nombre de usuario"
+      />
+      <input
+        type="password"
+        v-on:keyup.enter="send"
+        v-model="password"
+        placeholder="contraseña"
+      />
       <button @click="send">Enviar</button>
     </div>
     <div class="red" @click="messageOn">¿Olvidaste la contraseña?</div>
@@ -31,9 +41,9 @@ export default {
     };
   },
   methods: {
-    messageOn(){
-      this.error=false;
-     this.message=true;
+    messageOn() {
+      this.error = false;
+      this.message = true;
     },
     send() {
       const user = {
@@ -52,11 +62,10 @@ export default {
         .then((data) => {
           if (data.status == 404) {
             this.error = true;
-            this.message=false;
+            this.message = false;
             this.errorMessage = data.message;
           } else {
             localStorage.login = JSON.stringify(data);
-            console.log(data);
             this.$router.go();
           }
         });
@@ -66,17 +75,16 @@ export default {
 </script>
 
 <style scoped>
-
-.red{
+.red {
   color: red;
   font-size: 14px;
 }
 
-.red:hover{
+.red:hover {
   cursor: pointer;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,7 +95,9 @@ export default {
   padding-left: 3em;
 }
 
-.image-container, .text-container, .alert{
+.image-container,
+.text-container,
+.alert {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -95,23 +105,23 @@ export default {
   min-width: 230px;
 }
 
-.image-container{
+.image-container {
   width: 70%;
   margin-bottom: 2em;
 }
 
-.image{
+.image {
   margin: 15px;
   width: 80%;
   margin: 0 auto;
 }
 
-input, button{
+input,
+button {
   margin-bottom: 1em;
 }
 
-
-.alert{
+.alert {
   min-width: 230px;
 }
 </style>
