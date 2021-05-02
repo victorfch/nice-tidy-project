@@ -6,6 +6,7 @@
          <div class="reserva" v-for="habitacion in habitaciones" :key="habitacion.id">
             <h5>Habitación {{ habitacion.number }}</h5>
             <input type="hidden" :value="habitacion.id" />
+            <input type="hidden" :value="habitacion.user_id">
             <div>
                 <br>
                 <input type="checkbox" checked> <span>Checkout</span>
@@ -35,7 +36,6 @@ export default {
         .then((data) => (this.habitaciones = data));
     },
     actualizar(habitacion){
-        habitacion.user_id=name.id
         const options = {
             method: "post",
             body: JSON.stringify(habitacion),
