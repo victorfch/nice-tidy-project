@@ -1,6 +1,7 @@
 package com.ieslasgalletas.back.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ieslasgalletas.back.entity.Room;
+import com.ieslasgalletas.back.exception.RoomNotFound;
 import com.ieslasgalletas.back.repository.RoomRepository;
 import com.ieslasgalletas.back.service.RoomService;
 
@@ -42,13 +44,13 @@ public class RoomServiceMySQL implements RoomService {
 
 	
 	@Override
-	public void updateRoom(Room newRoom, int id) {
-		roomRepository.findById(id).map(room -> {
-			room.setClean(newRoom.isClean());
-			room.setOccupied(newRoom.isOccupied());
-			room.setUrgent(newRoom.isUrgent());
-			return roomRepository.save(room);
-		});
+	public Room updateRoom(Room newRoom, int id) {
+		System.out.println(newRoom);
+		Optional<Room> room = roomRepository.findById(id);
+		if (!room.isPresent()) {
+			throw new RoomNotFound();
+		}
+		return roomRepository.save(newRoom);
 	}
 
 	@Override

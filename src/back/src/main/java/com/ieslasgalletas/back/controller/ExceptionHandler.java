@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.ieslasgalletas.back.exception.RoomNotFound;
 import com.ieslasgalletas.back.exception.UserNotFoundException;
 import com.ieslasgalletas.back.exception.UsernameExistException;
 
@@ -20,7 +21,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value());
     }
 	
-	@org.springframework.web.bind.annotation.ExceptionHandler(value = UserNotFoundException.class)
+	@org.springframework.web.bind.annotation.ExceptionHandler(value = {UserNotFoundException.class, RoomNotFound.class})
     public void springHandleNotFound(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.NOT_FOUND.value());
     }

@@ -82,26 +82,6 @@ public class User {
 		return rooms;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
-
 	public String getFullName() {
 		return name + " " + surname;
 	}

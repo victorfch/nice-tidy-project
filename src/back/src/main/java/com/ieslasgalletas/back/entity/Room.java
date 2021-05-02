@@ -135,4 +135,14 @@ public class Room {
 		return user;
 	}
 
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", number=" + number + ", bedsNumber=" + bedsNumber + ", checkInDate=" + checkInDate
+				+ ", checkOutDate=" + checkOutDate + ", isClean=" + isClean + ", isOccupied=" + isOccupied
+				+ ", isUrgent=" + isUrgent + ", type=" + type + ", user=" + user + "]";
+	}
+
+	
+	
+
 }

@@ -5,26 +5,33 @@
     <div class="reservas">
       <div class="reserva" v-for="reserva in reservas" :key="reserva.id">
         <h2>Habitación {{ reserva.number }} {{ bedType(reserva.type) }}</h2>
+        <input type="hidden" :value="reserva.id" />
         <span>camas {{ reserva.bedsNumber }}</span>
         <span>
-          <input type="date" :value="reserva.checkInDate" id="check_in" />
+          <input type="date" v-model="reserva.checkInDate" id="check_in" />
         </span>
         <span>
-          <input type="date" :value="reserva.checkOutDate" id="check_out" />
+          <input type="date" v-model="reserva.checkOutDate" id="check_out" />
         </span>
         <span>
-          <input type="checkbox" :checked="reserva.clean" id="clean" />
+          <input type="checkbox" v-model="reserva.clean" id="clean" />
           Limpia
         </span>
         <span>
-          <input type="checkbox" :checked="reserva.occupied" id="clean" />
+          <input
+            type="checkbox"
+            @change="reserva.occupied = !reserva.occupied"
+            :checked="reserva.occupied"
+            id="clean"
+          />
           Ocupada
         </span>
         <span>
-          <button @click="eliminarReserva(reserva.id)">
-            Eliminar reserva
-          </button></span
-        >
+          <button @click="actualizar(reserva)">Actualizar</button>
+        </span>
+        <span>
+          <button @click="eliminarReserva(reserva.id)">Eliminar reserva</button>
+        </span>
       </div>
     </div>
   </div>
@@ -39,6 +46,18 @@ export default {
     };
   },
   methods: {
+    actualizar(reserva) {
+      const options = {
+        method: "post",
+        body: JSON.stringify(reserva),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      fetch(`http://localhost:8080/rooms/${reserva.id}`, options)
+        .then((res) => res.json())
+        .then(() => this.getReservas());
+    },
     eliminarReserva(id) {
       fetch(`http://localhost:8080/reserve/${id}`, { method: "delete" })
         .then((res) => res.text())
