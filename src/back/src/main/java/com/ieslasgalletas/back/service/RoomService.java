@@ -16,4 +16,6 @@ public interface RoomService {
 	public abstract void deleteReservation(int id);
 	
 	public abstract void deleteRoom(int id);
+
+	public abstract Room addReserve(Room newReserve);
 }
