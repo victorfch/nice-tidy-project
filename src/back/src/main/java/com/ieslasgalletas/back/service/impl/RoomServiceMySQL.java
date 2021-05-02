@@ -16,8 +16,6 @@ import com.ieslasgalletas.back.service.RoomService;
 @Service
 public class RoomServiceMySQL implements RoomService {
 
-	private static final Logger LOG = LoggerFactory.getLogger("ProductController");
-
 	@Autowired
 	private RoomRepository roomRepository;
 

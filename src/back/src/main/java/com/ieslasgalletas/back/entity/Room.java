@@ -1,6 +1,7 @@
 package com.ieslasgalletas.back.entity;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ieslasgalletas.back.repository.RoomRepository;
+import com.ieslasgalletas.back.repository.UserRepository;
 
 @Entity
 @Table(name = "rooms")
@@ -48,6 +53,7 @@ public class Room {
 	@ManyToOne()
 	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
+	
 
 	public Room() {
 	}
@@ -123,13 +129,13 @@ public class Room {
 		return type;
 	}
 	
-	public String getUser_id() {
+	public int getUser_id() {
 		if (user == null) {
-			return "";
+			return -1;
 		}
-		return user.getFullName();
+		return user.getId();
 	}
-
+	
 	@JsonIgnore
 	public User getUser() {
 		return user;

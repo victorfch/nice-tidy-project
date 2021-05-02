@@ -50,13 +50,12 @@
         </div>
         <div class="form-group">
           <label for="role">Rol</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="user.role"
-            id="role"
-            required
-          />
+          <select id="role" v-model="user.role">
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_RECEPCIONIST">RECEPCIONISTA</option>
+            <option value="ROLE_CHAMBERMAIDS">CAMARERO DE PISO</option>
+            <option value="ROLE_GOVER">GOBERNANTA</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button
