@@ -6,6 +6,7 @@ import VerUsuario from '../views/VerUsuario.vue'
 import FormUsuario from '../views/FormUsuario.vue'
 import Reservas from '../views/Reservas.vue'
 import Camarera from '../views/Camarera.vue'
+import Gobernanta from '../views/Gobernanta.vue'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/camarera',
     name: 'Camarera',
     component: Camarera
+  },
+  {
+    path: '/gobernanta',
+    name: 'Gobernanta',
+    component: Gobernanta
   },
 ]
 

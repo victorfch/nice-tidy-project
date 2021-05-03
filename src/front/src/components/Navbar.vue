@@ -23,6 +23,10 @@
           <router-link class="nav-link" to="/camarera">Inicio</router-link>
         </li>
 
+        <li v-if="user.role === 'ROLE_GOVER'" class="nav-item">
+          <router-link class="nav-link" to="/gobernanta">Inicio</router-link>
+        </li>
+
         <li v-else class="nav-item">
           <router-link class="nav-link" to="/">Inicio</router-link>
         </li>

@@ -3,6 +3,7 @@
     <h1>Listado del día: {{ user.fullName }}</h1>
     <hr />
     <div class="reservas">
+        <div class="alert alert-success" v-if="alerta">Actualización realizada con éxito</div>
          <div class="reserva" v-for="habitacion in habitaciones" :key="habitacion.id">
             <h5>Habitación {{ habitacion.number }}</h5>
             <input type="hidden" :value="habitacion.id" />
@@ -27,6 +28,7 @@ export default {
     return {
       user: JSON.parse(localStorage.getItem("login")),
       habitaciones: [],
+      alerta:false,
     };
   },
   methods: {
@@ -46,7 +48,14 @@ export default {
         fetch(`http://localhost:8080/rooms/${habitacion.id}`, options)
         .then((res)=> res.json())
         .then(()=> this.getReservas());
+        this.alertaExito();
     },
+    alertaExito(){
+      this.alerta = true;
+      setTimeout(() => {
+            this.alerta = false;
+        }, 2000);
+    }
   },
   mounted() {
     this.getReservas();

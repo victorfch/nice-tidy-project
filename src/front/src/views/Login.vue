@@ -4,6 +4,7 @@
       <img src="@/assets/logo.png" alt="logo" class="image" />
     </div>
     <div class="text-container">
+      <input type="hidden">
       <input
         type="text"
         v-on:keyup.enter="send"
