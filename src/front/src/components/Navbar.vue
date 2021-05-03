@@ -19,26 +19,25 @@
     </button>
     <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">Home</router-link>
+        <li v-if="user.role === 'ROLE_CHAMBERMAIDS'" class="nav-item">
+          <router-link class="nav-link" to="/camarera">Inicio</router-link>
         </li>
 
-        <li class="nav-item">
+        <li v-else class="nav-item">
+          <router-link class="nav-link" to="/">Inicio</router-link>
+        </li>
+
+        <li v-if="user.role !== 'ROLE_CHAMBERMAIDS'" class="nav-item">
           <router-link class="nav-link" to="/reservas">Reservas</router-link>
         </li>
 
-        <li class="nav-item">
+        <li v-if="user.role === 'ROLE_ADMIN'" class="nav-item">
           <router-link class="nav-link" to="/usuarios">Usuarios</router-link>
         </li>
 
-        <li class="nav-item">
+        <li v-if="user.role === 'ROLE_ADMIN'" class="nav-item">
           <router-link class="nav-link" to="/habitaciones"
             >Habitaciones</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/camarera"
-            >Camarera</router-link
           >
         </li>
 
@@ -53,6 +52,11 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      user: JSON.parse(localStorage.login),
+    };
+  },
   methods: {
     logout() {
       localStorage.removeItem("login");

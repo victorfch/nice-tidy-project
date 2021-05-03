@@ -3,7 +3,6 @@
     <h1>Listado del día: {{ user.fullName }}</h1>
     <hr />
     <div class="reservas">
-<<<<<<< HEAD
          <div class="reserva" v-for="habitacion in habitaciones" :key="habitacion.id">
             <h5>Habitación {{ habitacion.number }}</h5>
             <input type="hidden" :value="habitacion.id" />
@@ -17,30 +16,6 @@
                 <button class="btn btn-info" @click="actualizar(habitacion)">Actualizar</button>
             </div>
          </div>
-=======
-      <div
-        class="reserva"
-        v-for="habitacion in habitaciones"
-        :key="habitacion.id"
-      >
-        <h5>Habitación {{ habitacion.number }}</h5>
-        <input type="hidden" :value="habitacion.id" />
-        <input type="hidden" :value="habitacion.userId" />
-        <div>
-          <br />
-          <input type="checkbox" checked /> <span>Checkout</span>
-          <input type="checkbox" v-model="habitacion.occupied" />
-          <span>Ocupado</span>
-          <input type="checkbox" v-model="habitacion.clean" />
-          <span>Limpio</span>
-          <input type="checkbox" v-model="habitacion.urgent" />
-          <span>Urgente</span>
-          <button class="btn btn-info" @click="actualizar(habitacion)">
-            Actualizar
-          </button>
-        </div>
-      </div>
->>>>>>> 457b9584020726ca4cca1dd128adb4d78f31c83e
     </div>
   </div>
 </template>
@@ -60,7 +35,6 @@ export default {
         .then((res) => res.json())
         .then((data) => (this.habitaciones = data));
     },
-<<<<<<< HEAD
     actualizar(habitacion){
         const options = {
             method: "post",
@@ -72,19 +46,6 @@ export default {
         fetch(`http://localhost:8080/rooms/${habitacion.id}`, options)
         .then((res)=> res.json())
         .then(()=> this.getReservas());
-=======
-    actualizar(habitacion) {
-      const options = {
-        method: "post",
-        body: JSON.stringify(habitacion),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      fetch(`http://localhost:8080/rooms/${habitacion.id}`, options)
-        .then((res) => res.json())
-        .then(() => this.getReservas());
->>>>>>> 457b9584020726ca4cca1dd128adb4d78f31c83e
     },
   },
   mounted() {
