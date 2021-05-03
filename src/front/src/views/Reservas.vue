@@ -124,6 +124,7 @@ export default {
   border: 1px solid black;
   padding: 2em;
   margin: 1em;
+  width: 70vw;
 }
 span {
   margin: 1em;
@@ -132,7 +133,6 @@ span {
 .collapse {
   width: 71vw;
   padding: 1em;
-  /*border: 0.1em solid black;*/
   box-shadow: 2px 2px 2px 2px rgb(98, 98, 98);
 }
 </style>
