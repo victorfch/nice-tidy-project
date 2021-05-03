@@ -48,12 +48,13 @@ public class UserServiceMySQL implements UserService {
 	@Override
 	public User updateUser(int id, User user) {
 		Optional<User> opUser = userRepository.findById(id);
-		
-		if(opUser.isPresent()) {
-			user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
-			return userRepository.save(user);
+		if(!opUser.isPresent()) {
+			throw new UserNotFoundException();
 		}
-		throw new UserNotFoundException();
+		if (!opUser.get().getPassword().equals(user.getPassword())) {
+			user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));				
+		} 
+		return userRepository.save(user);
 	}
 	
 	@Override

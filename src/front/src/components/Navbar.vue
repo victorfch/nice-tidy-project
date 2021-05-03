@@ -3,6 +3,7 @@
     class="navbar navbar-expand-lg navbar-light col-lg-3 col-sm-12"
     style="background-color: #e3f2fd"
   >
+    {{ user.role }}
     <router-link class="navbar-brand m-2" to="/">
       <span class="d-block d-lg-none">Nice & Tidy</span>
     </router-link>
@@ -19,11 +20,11 @@
     </button>
     <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li v-if="user.role === 'ROLE_CHAMBERMAIDS'" class="nav-item">
+        <li class="nav-item">
           <router-link class="nav-link" to="/camarera">Inicio</router-link>
         </li>
 
-        <li v-else class="nav-item">
+        <li class="nav-item">
           <router-link class="nav-link" to="/">Inicio</router-link>
         </li>
 
