@@ -3,28 +3,20 @@
     <h1>Listado del día: {{ user.fullName }}</h1>
     <hr />
     <div class="reservas">
-      <div
-        class="reserva"
-        v-for="habitacion in habitaciones"
-        :key="habitacion.id"
-      >
-        <h5>Habitación {{ habitacion.number }}</h5>
-        <input type="hidden" :value="habitacion.id" />
-        <input type="hidden" :value="habitacion.userId" />
-        <div>
-          <br />
-          <input type="checkbox" checked /> <span>Checkout</span>
-          <input type="checkbox" v-model="habitacion.occupied" />
-          <span>Ocupado</span>
-          <input type="checkbox" v-model="habitacion.clean" />
-          <span>Limpio</span>
-          <input type="checkbox" v-model="habitacion.urgent" />
-          <span>Urgente</span>
-          <button class="btn btn-info" @click="actualizar(habitacion)">
-            Actualizar
-          </button>
-        </div>
-      </div>
+        <div class="alert alert-success" v-if="alerta">Actualización realizada con éxito</div>
+         <div class="reserva" v-for="habitacion in habitaciones" :key="habitacion.id">
+            <h5>Habitación {{ habitacion.number }}</h5>
+            <input type="hidden" :value="habitacion.id" />
+            <input type="hidden" :value="habitacion.user_id">
+            <div>
+                <br>
+                <input type="checkbox" checked> <span>Checkout</span>
+                <input type="checkbox"  v-model="habitacion.occupied"> <span>Ocupado</span> 
+                <input type="checkbox"  v-model="habitacion.clean"> <span>Limpio</span>
+                <input type="checkbox"  v-model="habitacion.urgent"> <span>Urgente</span>
+                <button class="btn btn-info" @click="actualizar(habitacion)">Actualizar</button>
+            </div>
+         </div>
     </div>
   </div>
 </template>
@@ -36,6 +28,7 @@ export default {
     return {
       user: JSON.parse(localStorage.getItem("login")),
       habitaciones: [],
+      alerta:false,
     };
   },
   methods: {
@@ -44,18 +37,25 @@ export default {
         .then((res) => res.json())
         .then((data) => (this.habitaciones = data));
     },
-    actualizar(habitacion) {
-      const options = {
-        method: "post",
-        body: JSON.stringify(habitacion),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      fetch(`http://localhost:8080/rooms/${habitacion.id}`, options)
-        .then((res) => res.json())
-        .then(() => this.getReservas());
+    actualizar(habitacion){
+        const options = {
+            method: "post",
+            body: JSON.stringify(habitacion),
+            headers:{
+                "Content-Type": "application/json",
+            },
+        };
+        fetch(`http://localhost:8080/rooms/${habitacion.id}`, options)
+        .then((res)=> res.json())
+        .then(()=> this.getReservas());
+        this.alertaExito();
     },
+    alertaExito(){
+      this.alerta = true;
+      setTimeout(() => {
+            this.alerta = false;
+        }, 2000);
+    }
   },
   mounted() {
     this.getReservas();
