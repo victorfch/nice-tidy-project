@@ -5,8 +5,16 @@
     <router-link class="btn btn-primary" to="/nuevo-usuario"
       ><i class="fas fa-plus"></i> Usuario</router-link
     >
-    <div class="card-columns mt-2">
-      <div v-for="user in users" :key="user.id" class="card">
+    <div
+      class="container flex-wrap justify-content-start"
+      style="display: flex"
+    >
+      <div
+        v-for="user in users"
+        :key="user.id"
+        style="width: 29%"
+        class="card pt-2 m-3"
+      >
         <div class="card-title p-2">{{ user.fullName }}</div>
         <div class="card-footer text-center">
           <router-link

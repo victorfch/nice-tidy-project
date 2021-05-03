@@ -1,23 +1,25 @@
 <template>
   <div class="container">
-    <div class="image-container">
-      <img src="@/assets/logo.png" alt="logo" class="image" />
-    </div>
+    <img src="@/assets/logo.png" alt="logo" class="image mb-4" />
     <div class="text-container">
-      <input type="hidden">
+      <input type="hidden" />
       <input
+        class="form-control"
         type="text"
         v-on:keyup.enter="send"
-        v-model="username"
-        placeholder="nombre de usuario"
+        v-model="user.username"
+        placeholder="Username"
       />
       <input
+        class="form-control"
         type="password"
         v-on:keyup.enter="send"
-        v-model="password"
-        placeholder="contraseña"
+        v-model="user.password"
+        placeholder="Password"
       />
-      <button @click="send">Enviar</button>
+      <button class="btn btn-lg btn-primary btn-block" @click="send">
+        Enviar
+      </button>
     </div>
     <div class="red" @click="messageOn">¿Olvidaste la contraseña?</div>
     <div class="alert alert-info" v-if="message">
@@ -36,8 +38,7 @@ export default {
     return {
       error: false,
       errorMessage: "",
-      username: "",
-      password: "",
+      user: {},
       message: false,
     };
   },
@@ -47,13 +48,9 @@ export default {
       this.message = true;
     },
     send() {
-      const user = {
-        username: this.username,
-        password: this.password,
-      };
       const options = {
         method: "post",
-        body: JSON.stringify(user),
+        body: JSON.stringify(this.user),
         headers: {
           "Content-Type": "application/json",
         },
@@ -67,7 +64,15 @@ export default {
             this.errorMessage = data.message;
           } else {
             localStorage.login = JSON.stringify(data);
-            this.$router.go();
+            if (data.role === "ROLE_GOVER") {
+              window.location.href = "http://localhost:3000/#/gobernanta";
+              location.reload();
+            } else if (data.role === "ROLE_CHAMBERMAIDS") {
+              window.location.href = "http://localhost:3000/#/camarera";
+              location.reload();
+            } else {
+              this.$router.go();
+            }
           }
         });
     },
@@ -79,6 +84,18 @@ export default {
 .red {
   color: red;
   font-size: 14px;
+}
+
+input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .red:hover {
@@ -96,7 +113,6 @@ export default {
   padding-left: 3em;
 }
 
-.image-container,
 .text-container,
 .alert {
   display: flex;
@@ -106,15 +122,10 @@ export default {
   min-width: 230px;
 }
 
-.image-container {
-  width: 70%;
-  margin-bottom: 2em;
-}
-
 .image {
   margin: 15px;
-  width: 80%;
-  margin: 0 auto;
+  height: 40vh;
+  width: 25vw;
 }
 
 input,

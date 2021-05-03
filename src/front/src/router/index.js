@@ -10,11 +10,6 @@ import Gobernanta from '../views/Gobernanta.vue'
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios
@@ -55,6 +50,11 @@ const routes = [
     path: '/gobernanta',
     name: 'Gobernanta',
     component: Gobernanta
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
   },
 ]
 

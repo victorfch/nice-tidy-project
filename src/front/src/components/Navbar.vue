@@ -3,7 +3,6 @@
     class="navbar navbar-expand-lg navbar-light col-lg-3 col-sm-12"
     style="background-color: #e3f2fd"
   >
-    {{ user.role }}
     <router-link class="navbar-brand m-2" to="/">
       <span class="d-block d-lg-none">Nice & Tidy</span>
     </router-link>
@@ -21,18 +20,29 @@
     <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link class="nav-link" to="/camarera">Inicio</router-link>
+          <router-link
+            v-if="user.role === 'ROLE_CHAMBERMAIDS'"
+            class="nav-link"
+            to="/camarera"
+            >Inicio</router-link
+          >
         </li>
 
         <li v-if="user.role === 'ROLE_GOVER'" class="nav-item">
           <router-link class="nav-link" to="/gobernanta">Inicio</router-link>
         </li>
 
-        <li v-else class="nav-item">
+        <li
+          v-if="user.role === 'ROLE_ADMIN' || user.role === 'ROLE_RECEPCIONIST'"
+          class="nav-item"
+        >
           <router-link class="nav-link" to="/">Inicio</router-link>
         </li>
 
-        <li v-if="user.role !== 'ROLE_CHAMBERMAIDS'" class="nav-item">
+        <li
+          v-if="user.role === 'ROLE_RECEPCIONIST' || user.role === 'ROLE_ADMIN'"
+          class="nav-item"
+        >
           <router-link class="nav-link" to="/reservas">Reservas</router-link>
         </li>
 
@@ -65,7 +75,8 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("login");
-      this.$router.go();
+      window.location.href = "http://localhost:3000/#";
+      location.reload();
     },
   },
 };
