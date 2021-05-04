@@ -25,33 +25,20 @@
 
     <div class="reservas">
       <div class="reserva" v-for="reserva in reservas" :key="reserva.id">
-        <h2>Habitación {{ reserva.number }} {{ bedType(reserva.type) }}</h2>
-        <input type="hidden" :value="reserva.id" />
-        <span>camas {{ reserva.bedsNumber }}</span>
-        <span>
+        <div>
+          <h2>Habitación {{ reserva.number }} &nbsp;&nbsp;&nbsp;&nbsp; {{ bedType(reserva.type) }}
+          <button class="btn btn-success" id="actualizar" @click="actualizar(reserva)"> Actualizar </button>
+          </h2>
+          <input type="hidden" :value="reserva.id" />
+        </div>
+        <div>
+          <span>{{ reserva.bedsNumber }} camas</span>
           <input type="date" v-model="reserva.checkInDate" id="check_in" />
-        </span>
-        <span>
           <input type="date" v-model="reserva.checkOutDate" id="check_out" />
-        </span>
-        <span>
-          <input type="checkbox" v-model="reserva.clean" id="clean" />
-          Limpia
-        </span>
-        <span>
-          <input type="checkbox" v-model="reserva.occupied" id="clean" />
-          Ocupada
-        </span>
-        <span>
-          <button class="btn btn-success" @click="actualizar(reserva)">
-            Actualizar
-          </button>
-        </span>
-        <span>
-          <button class="btn btn-danger" @click="eliminarReserva(reserva.id)">
-            Eliminar reserva
-          </button>
-        </span>
+          <input type="checkbox" class="limpio" v-model="reserva.clean" id="clean" /> Limpia
+          <input type="checkbox" class="ocupado" v-model="reserva.occupied" id="clean" /> Ocupada
+          <button class="btn btn-danger" id="eliminar" @click="eliminarReserva(reserva.id)"> Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -126,13 +113,44 @@ export default {
   margin: 1em;
   width: 70vw;
 }
-span {
-  margin: 1em;
+
+#actualizar{
+  float: right;
+}
+
+#eliminar{
+  float:right;
+}
+
+#eliminar, #actualizar{
+  width: 90px;
 }
 
 .collapse {
   width: 71vw;
   padding: 1em;
   box-shadow: 2px 2px 2px 2px rgb(98, 98, 98);
+}
+
+input[type="date"]{
+  width: 130px;
+  margin-right: 5px;
+}
+
+input[type="date"]:nth-child(3){
+  margin-right: 20px;
+}
+
+.limpio{
+  margin-left: 10px;
+  color: red;
+}
+
+.ocupado{
+  margin-left: 10px;
+}
+
+.reserva{
+  display: flex-row;
 }
 </style>
