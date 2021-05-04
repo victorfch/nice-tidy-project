@@ -93,6 +93,8 @@ nav .navbar-collapse .navbar-nav a {
 
 @media (min-width: 990px) {
   nav {
+    position: sticky;
+    top: 0;
     text-align: center;
     display: flex;
     height: 100vh;
