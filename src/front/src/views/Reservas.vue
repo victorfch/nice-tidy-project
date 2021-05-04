@@ -107,7 +107,14 @@ export default {
         },
       };
       fetch(`http://localhost:8080/rooms/${reserva.id}`, options)
-        .then((res) => res.json())
+        .then((res) =>{
+          if(res.status == 200){
+            this.alertaExito();
+          }else{
+            this.alertaError();
+          }
+          return res.json()
+        })
         .then(() => this.getReservas());
     },
     eliminarReserva(id) {
@@ -117,7 +124,14 @@ export default {
     },
     getReservas() {
       fetch("http://localhost:8080/reserves")
-        .then((res) => res.json())
+        .then((res) => {
+          if(res.status == 200){
+            this.alertaExito();
+          }else{
+            this.alertaError();
+          }
+          return res.json()
+        })
         .then((data) => (this.reservas = data));
     },
     bedType(type) {
@@ -175,7 +189,6 @@ input[type="date"]:nth-child(3){
 
 .limpio{
   margin-left: 10px;
-  color: red;
 }
 
 .ocupado{
