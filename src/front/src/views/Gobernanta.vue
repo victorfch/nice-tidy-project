@@ -6,6 +6,12 @@
       <button @click="send" class="btn btn-primary">Enviar</button>
       <input type="date" id="today" v-model="today" />
     </div>
+    <div class="alert alert-success" v-if="exito">
+      Operación realizada con éxito
+    </div>
+    <div class="alert alert-danger" v-if="error">
+      La operación no pudo realizarse
+    </div>
     <div class="table-responsive text-center">
       <table>
         <thead>
@@ -61,6 +67,8 @@ export default {
       today: new Date().toISOString().substr(0, 10),
       chambermaids: [],
       reserves: [],
+       exito:false,
+      error: false,
     };
   },
   methods: {
@@ -72,8 +80,15 @@ export default {
           "Content-Type": "application/json",
         },
       };
-      fetch("http://localhost:8080/send-to-chambers", options).then((res) =>
-        res.json()
+      fetch("http://localhost:8080/send-to-chambers", options)
+      .then((res) =>{
+        if(res.status == 200){
+          this.alertaExito();
+        }else{
+          this.alertaError();
+        }
+        return res.json()
+      }
       );
     },
     getChambermaids() {
@@ -85,6 +100,18 @@ export default {
       fetch("http://localhost:8080/today/reserves")
         .then((res) => res.json())
         .then((data) => (this.reserves = data));
+    },
+    alertaExito(){
+      this.exito = true;
+        setTimeout(() => {
+            this.exito = false;
+        }, 2000);
+    },
+    alertaError(){
+      this.error = true;
+        setTimeout(() => {
+            this.error = false;
+        }, 2000);
     },
   },
   mounted() {

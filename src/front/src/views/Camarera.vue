@@ -10,10 +10,10 @@
             <input type="hidden" :value="habitacion.user_id">
             <div>
                 <br>
-                <input type="checkbox" checked> <span>Checkout</span>
+                <input type="checkbox" checked disabled> <span>Checkout</span>
                 <input type="checkbox"  v-model="habitacion.occupied"> <span>Ocupado</span> 
                 <input type="checkbox"  v-model="habitacion.clean"> <span>Limpio</span>
-                <input type="checkbox"  v-model="habitacion.urgent"> <span>Urgente</span>
+                <input type="checkbox"  v-model="habitacion.urgent" disabled> <span>Urgente</span>
                 <button class="btn btn-info" @click="actualizar(habitacion)">Actualizar</button>
             </div>
          </div>
