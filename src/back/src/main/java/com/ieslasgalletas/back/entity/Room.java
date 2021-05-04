@@ -2,7 +2,6 @@ package com.ieslasgalletas.back.entity;
 
 import java.sql.Date;
 
-import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +54,7 @@ public class Room {
 	}
 
 	public Room(int id, int number, int bedsNumber, Date checkInDate, Date checkOutDate, boolean isClean,
-			boolean isOccupied, boolean isUrgent, int type, @Nullable User user) {
+			boolean isOccupied, boolean isUrgent, int type, User user) {
 		super();
 		this.id = id;
 		this.number = number;
