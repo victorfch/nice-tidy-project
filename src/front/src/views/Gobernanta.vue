@@ -6,21 +6,21 @@
       <button @click="send" class="btn btn-primary">Enviar</button>
       <input type="date" id="today" v-model="today" />
     </div>
-    <div class="table">
+    <div class="table-responsive text-center">
       <table>
         <thead>
           <tr>
-            <td>Camarera</td>
-            <td>nº hab</td>
-            <td>Limpia</td>
-            <td>Ocupada</td>
-            <td>Checkout</td>
-            <td>Urgente</td>
+            <th scope="col">Camarera</th>
+            <th scope="col">nº hab</th>
+            <th scope="col">Limpia</th>
+            <th scope="col">Ocupada</th>
+            <th scope="col">Checkout</th>
+            <th scope="col">Urgente</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="reserve in reserves" :key="reserve.id">
-            <td>
+            <td scope="row">
               <select v-model="reserve.user_id">
                 <option
                   v-for="chambermaid in chambermaids"
