@@ -126,8 +126,12 @@ export default {
   width: 90px;
 }
 
+#checkin, #checkout{
+  float:right;
+}
+
 .collapse {
-  width: 71vw;
+  width: max-content;
   padding: 1em;
   box-shadow: 2px 2px 2px 2px rgb(98, 98, 98);
 }
