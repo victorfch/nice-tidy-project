@@ -50,7 +50,7 @@ public class User {
 		this.password = password;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
