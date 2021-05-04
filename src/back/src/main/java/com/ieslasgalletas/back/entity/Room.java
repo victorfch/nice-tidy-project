@@ -1,8 +1,8 @@
 package com.ieslasgalletas.back.entity;
 
 import java.sql.Date;
-import java.util.Optional;
 
+import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ieslasgalletas.back.repository.RoomRepository;
-import com.ieslasgalletas.back.repository.UserRepository;
 
 @Entity
 @Table(name = "rooms")
@@ -59,7 +55,7 @@ public class Room {
 	}
 
 	public Room(int id, int number, int bedsNumber, Date checkInDate, Date checkOutDate, boolean isClean,
-			boolean isOccupied, boolean isUrgent, int type, User user) {
+			boolean isOccupied, boolean isUrgent, int type, @Nullable User user) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -129,7 +125,7 @@ public class Room {
 		return type;
 	}
 	
-	public int getUser_id() {
+	public Integer getUser_id() {
 		if (user == null) {
 			return -1;
 		}

@@ -86,5 +86,10 @@ public class UserServiceMySQL implements UserService {
 		return user;
 	}
 
+	@Override
+	public List<User> getChambermaids() {
+		return userRepository.getChambermaids();
+	}
+
 	
 }

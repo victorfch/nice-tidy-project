@@ -30,7 +30,11 @@ public class UserController {
 		return userService.getUsers();
 	}
 	
-	//@CrossOrigin
+	@GetMapping("/chambermaids")
+	public List<User> getChamberMaids() {
+		return userService.getChambermaids();
+	}
+	
 	@PostMapping("/login")
 	public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 		User user = userService.getByUsername(authenticationRequest);

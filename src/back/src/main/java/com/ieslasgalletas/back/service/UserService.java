@@ -21,4 +21,6 @@ public interface UserService {
 	
 	public abstract User updateUser(int id, User user);
 
+	public abstract List<User> getChambermaids();
+
 }

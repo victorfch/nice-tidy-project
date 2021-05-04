@@ -1,5 +1,7 @@
 package com.ieslasgalletas.back.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ieslasgalletas.back.entity.Room;
 import com.ieslasgalletas.back.entity.RoomDTO;
 import com.ieslasgalletas.back.entity.User;
-import com.ieslasgalletas.back.entity.Room;
 import com.ieslasgalletas.back.service.RoomService;
 import com.ieslasgalletas.back.service.UserService;
 
@@ -26,8 +28,6 @@ public class RoomController {
 	@Autowired
 	private RoomService roomService;
 	
-	@Autowired
-	private UserService userService;
 
 	@GetMapping("/rooms")
 	public List<Room> all() {
@@ -44,6 +44,13 @@ public class RoomController {
 		return roomService.listAllRoomsByUser(id);
 	}
 	
+	@GetMapping("/today/reserves")
+	public List<Room> getTodayReservations(){
+		Date todayDate = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		return roomService.getTodayReservations(formatter.format(todayDate));
+	}
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/rooms")
 	public Room addRoom(@RequestBody Room room) {
@@ -51,21 +58,8 @@ public class RoomController {
 	}
 
 	@PostMapping("/rooms/{id}")
-	public Room updateRoom(@RequestBody RoomDTO roomDTO, @PathVariable int id) {
-		User user = userService.getUserById(roomDTO.getUser_id());
-		Room roomUpdated = new Room(
-				roomDTO.getId(), 
-				roomDTO.getNumber(), 
-				roomDTO.getBedsNumber(),
-				roomDTO.getCheckInDate(),
-				roomDTO.getCheckOutDate(),
-				roomDTO.isClean(),
-				roomDTO.isOccupied(),
-				roomDTO.isUrgent(),
-				roomDTO.getType(),
-				user);
-		
-		return roomService.updateRoom(roomUpdated, id);
+	public Room updateRoom(@RequestBody RoomDTO room, @PathVariable int id) {
+		return roomService.updateRoom(room, id);
 	}
 	
 	@PostMapping("/reserves")

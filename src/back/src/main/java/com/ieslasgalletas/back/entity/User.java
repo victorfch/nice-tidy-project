@@ -16,7 +16,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 
 	
 	@Column(name = "username", unique = true, nullable = false, length = 45)
@@ -40,7 +40,7 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String username, String name, String surname, String role, String password) {
+	public User(Integer id, String username, String name, String surname, String role, String password) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -94,6 +94,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", name=" + name + ", surname=" + surname + ", role="
-				+ role + ", password=" + password + "]";
+				+ role + ", password=" + password + ", rooms=" + rooms + "]";
 	}
+	
 }

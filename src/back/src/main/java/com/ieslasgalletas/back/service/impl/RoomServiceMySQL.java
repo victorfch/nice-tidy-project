@@ -3,18 +3,22 @@ package com.ieslasgalletas.back.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ieslasgalletas.back.entity.Room;
+import com.ieslasgalletas.back.entity.RoomDTO;
+import com.ieslasgalletas.back.entity.User;
 import com.ieslasgalletas.back.exception.RoomNotFound;
 import com.ieslasgalletas.back.repository.RoomRepository;
 import com.ieslasgalletas.back.service.RoomService;
+import com.ieslasgalletas.back.service.UserService;
 
 @Service
 public class RoomServiceMySQL implements RoomService {
+	
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private RoomRepository roomRepository;
@@ -42,12 +46,39 @@ public class RoomServiceMySQL implements RoomService {
 
 	
 	@Override
-	public Room updateRoom(Room newRoom, int id) {
+	public Room updateRoom(RoomDTO newRoom, int id) {
 		Optional<Room> room = roomRepository.findById(id);
 		if (!room.isPresent()) {
 			throw new RoomNotFound();
 		}
-		return roomRepository.save(newRoom);
+		Room roomUpdated = new Room(
+				newRoom.getId(), 
+				newRoom.getNumber(), 
+				newRoom.getBedsNumber(),
+				newRoom.getCheckInDate(),
+				newRoom.getCheckOutDate(),
+				newRoom.isClean(),
+				newRoom.isOccupied(),
+				newRoom.isUrgent(),
+				newRoom.getType(),
+				null);
+
+		if (!newRoom.isClean() && newRoom.getUser_id() != -1) {
+			User user = userService.getUserById(newRoom.getUser_id());
+			roomUpdated = new Room(
+					newRoom.getId(), 
+					newRoom.getNumber(), 
+					newRoom.getBedsNumber(),
+					newRoom.getCheckInDate(),
+					newRoom.getCheckOutDate(),
+					newRoom.isClean(),
+					newRoom.isOccupied(),
+					newRoom.isUrgent(),
+					newRoom.getType(),
+					user);
+		}
+		
+		return roomRepository.save(roomUpdated);
 	}
 
 	@Override
@@ -76,5 +107,10 @@ public class RoomServiceMySQL implements RoomService {
 		room.setCheckInDate(newReserve.getCheckInDate());
 		room.setCheckOutDate(newReserve.getCheckOutDate());
 		return roomRepository.save(room);
+	}
+
+	@Override
+	public List<Room> getTodayReservations(String format) {
+		return roomRepository.getTodayReservations(format);
 	}
 }

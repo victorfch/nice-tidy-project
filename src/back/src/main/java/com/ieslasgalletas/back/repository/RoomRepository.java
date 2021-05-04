@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ieslasgalletas.back.entity.Room;
+import com.ieslasgalletas.back.entity.RoomDTO;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Serializable> {
@@ -21,5 +22,8 @@ public interface RoomRepository extends JpaRepository<Room, Serializable> {
 
 	@Query(value = "SELECT * from rooms WHERE number = :number", nativeQuery = true)
 	public abstract Room findByNumber(@Param("number") Integer number);
+
+	@Query(value = "SELECT * from rooms WHERE check_out_date = :date and is_clean = false", nativeQuery = true)
+	public abstract List<Room> getTodayReservations(String date);
 
 }

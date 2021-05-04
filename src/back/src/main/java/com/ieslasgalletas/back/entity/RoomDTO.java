@@ -13,12 +13,12 @@ public class RoomDTO {
 	private boolean isOccupied;
 	private boolean isUrgent;
 	private int type;
-	private int user_id;
+	private Integer user_id;
 	
 	public RoomDTO() {}
 	
 	public RoomDTO(int id, int number, int bedsNumber, Date checkInDate, Date checkOutDate, boolean isClean,
-			boolean isOccupied, boolean isUrgent, int type, int user_id) {
+			boolean isOccupied, boolean isUrgent, int type, Integer user_id) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -104,7 +104,7 @@ public class RoomDTO {
 		this.type = type;
 	}
 
-	public int getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
 
