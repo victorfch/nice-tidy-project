@@ -44,6 +44,14 @@ public class RoomController {
 		return roomService.listAllRoomsByUser(id);
 	}
 	
+	@PostMapping("/send-to-chambers")
+	public boolean sendToChambermaids(@RequestBody List<RoomDTO> rooms) {
+		for (RoomDTO room : rooms) {
+			roomService.updateRoom(room, room.getId());
+		}
+		return true;
+	}
+	
 	@GetMapping("/today/reserves")
 	public List<Room> getTodayReservations(){
 		Date todayDate = new Date();

@@ -2,9 +2,8 @@
   <div>
     <h2>Organización limpieza</h2>
     <hr />
-    {{ today }}
     <div class="header">
-      <button class="btn btn-primary">Enviar</button>
+      <button @click="send" class="btn btn-primary">Enviar</button>
       <input type="date" id="today" v-model="today" />
     </div>
     <div class="table">
@@ -13,14 +12,44 @@
           <tr>
             <td>Camarera</td>
             <td>nº hab</td>
+            <td>Limpia</td>
             <td>Ocupada</td>
             <td>Checkout</td>
             <td>Urgente</td>
           </tr>
         </thead>
+        <tbody>
+          <tr v-for="reserve in reserves" :key="reserve.id">
+            <td>
+              <select v-model="reserve.user_id">
+                <option
+                  v-for="chambermaid in chambermaids"
+                  :key="chambermaid.id"
+                  :value="chambermaid.id"
+                >
+                  {{ chambermaid.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              {{ reserve.bedsNumber }}
+            </td>
+            <td>
+              <input type="checkbox" v-model="reserve.clean" />
+            </td>
+            <td>
+              <input type="checkbox" v-model="reserve.occupied" />
+            </td>
+            <td>
+              <input type="date" disabled v-model="reserve.checkOutDate" />
+            </td>
+            <td>
+              <input type="checkbox" v-model="reserve.urgent" />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-    {{ chambermaids }}
   </div>
 </template>
 
@@ -35,6 +64,18 @@ export default {
     };
   },
   methods: {
+    send() {
+      const options = {
+        method: "post",
+        body: JSON.stringify(this.reserves),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      fetch("http://localhost:8080/send-to-chambers", options).then((res) =>
+        res.json()
+      );
+    },
     getChambermaids() {
       fetch("http://localhost:8080/chambermaids")
         .then((res) => res.json())
