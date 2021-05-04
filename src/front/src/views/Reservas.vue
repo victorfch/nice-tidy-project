@@ -13,9 +13,15 @@
         Nueva
       </button>
     </p>
+    <div class="alert alert-success" v-if="exito">
+      Operación realizada con éxito
+    </div>
+    <div class="alert alert-danger" v-if="error">
+      La operación no pudo realizarse
+    </div>
     <div class="collapse ml-3" id="collapseForm">
       <label for="number">Numero: </label>
-      <input type="number" id="number" v-model="reserve.number" /> <br />
+      <input type="number" min="1" id="number" v-model="reserve.number" /> <br />
       <label for="checkin">Fecha checkin:</label>
       <input type="date" id="checkin" v-model="reserve.checkInDate" /> <br />
       <label for="checkout">Fecha checkout:</label>
@@ -32,7 +38,7 @@
           <input type="hidden" :value="reserva.id" />
         </div>
         <div>
-          <span>{{ reserva.bedsNumber }} camas</span>
+          <span>{{ reserva.bedsNumber }} cama{{ reserva.bedsNumber > 1 ? "s" : null }}</span>
           <input type="date" v-model="reserva.checkInDate" id="check_in" />
           <input type="date" v-model="reserva.checkOutDate" id="check_out" />
           <input type="checkbox" class="limpio" v-model="reserva.clean" id="clean" /> Limpia
@@ -51,6 +57,8 @@ export default {
     return {
       reserve: {},
       reservas: [],
+      exito:false,
+      error: false,
     };
   },
   methods: {
@@ -63,12 +71,32 @@ export default {
         },
       };
       fetch(`http://localhost:8080/reserves`, options)
-        .then((res) => res.json())
+        .then((res) => {
+          if(res.status == 200){
+            this.alertaExito();
+          }else{
+            this.alertaError();
+          }
+          return res.json()
+        })
         .then(() => {
           this.$refs.btn_new.click();
           this.getReservas();
           this.reserve = {};
+          
         });
+    },
+    alertaExito(){
+      this.exito = true;
+        setTimeout(() => {
+            this.exito = false;
+        }, 2000);
+    },
+    alertaError(){
+      this.error = true;
+        setTimeout(() => {
+            this.error = false;
+        }, 2000);
     },
     actualizar(reserva) {
       const options = {
@@ -137,7 +165,7 @@ export default {
 }
 
 input[type="date"]{
-  width: 130px;
+  width: 150px;
   margin-right: 5px;
 }
 
