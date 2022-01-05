@@ -14,7 +14,7 @@ IES Las Galletas
 
 ## Clonar la repo
 ```sh
-git clone https://github.com/victorfch/nice-tidy-project.git
+git clone https://github.com/LorenaDeveloper/nice-tidy-project
 ```
 
 ## Frontend
