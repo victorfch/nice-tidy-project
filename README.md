@@ -3,7 +3,7 @@
 Proyecto para la administración de la limpieza de habitaciones de los hoteles
 
 ## Autores ✒️
-* **Lorena Jiménez Tejada** - [lorejim](https://github.com/lorejim)
+* **Lorena Jiménez Tejada** - [LorenaDeveloper](https://github.com/LorenaDeveloper)
 * **Víctor Manuel Faría Chávez** - [victorfch](https://github.com/victorfch)
 
 2º CFGS Informática y Comunicaciones - Desarrollo de Aplicaciones Web
