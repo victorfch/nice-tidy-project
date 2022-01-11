@@ -35,4 +35,7 @@ export default {
   color: #2c3e50;
   width: 98.4%;
 }
+* {
+  box-sizing: border-box;
+}
 </style>

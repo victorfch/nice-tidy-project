@@ -5,13 +5,10 @@ import Habitaciones from '../views/Habitaciones.vue'
 import VerUsuario from '../views/VerUsuario.vue'
 import FormUsuario from '../views/FormUsuario.vue'
 import Reservas from '../views/Reservas.vue'
+import Camarera from '../views/Camarera.vue'
+import Gobernanta from '../views/Gobernanta.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/usuarios',
     name: 'Usuarios',
@@ -43,6 +40,21 @@ const routes = [
     name: 'ver-usuario',
     component: VerUsuario,
     props: true
+  },
+  {
+    path: '/camarera',
+    name: 'Camarera',
+    component: Camarera
+  },
+  {
+    path: '/gobernanta',
+    name: 'Gobernanta',
+    component: Gobernanta
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
   },
 ]
 

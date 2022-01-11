@@ -24,38 +24,39 @@ import com.ieslasgalletas.back.service.UserService;
 public class UserServiceMySQL implements UserService {
 	@Autowired
 	UserRepository userRepository;
-	
-	
+
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncode;
-	
+
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncode() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Override
 	public User addUser(User user) {
 		user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
 		try {
-			return userRepository.save(user);			
+			return userRepository.save(user);
 		} catch (Exception e) {
 			throw new UsernameExistException();
 		}
 	}
-	
-	
+
+
 	@Override
 	public User updateUser(int id, User user) {
 		Optional<User> opUser = userRepository.findById(id);
-		
-		if(opUser.isPresent()) {
-			user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
-			return userRepository.save(user);
+		if(!opUser.isPresent()) {
+			throw new UserNotFoundException();
 		}
-		throw new UserNotFoundException();
+		if (!opUser.get().getPassword().equals(user.getPassword())) {
+			user.setPassword(bCryptPasswordEncode.encode(user.getPassword()));
+		}
+		return userRepository.save(user);
 	}
-	
+
 	@Override
 	public void deleteUser(int id) {
 		userRepository.deleteById(id);
@@ -80,10 +81,13 @@ public class UserServiceMySQL implements UserService {
 		}
 		if (!bCryptPasswordEncode.matches(request.getPassword(), user.getPassword())) {
 			throw new UserNotFoundException();
-		} 
-		
+		}
+
 		return user;
 	}
 
-	
+	@Override
+	public List<User> getChambermaids() {
+		return userRepository.getChambermaids();
+	}
 }

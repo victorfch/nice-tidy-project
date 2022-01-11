@@ -3,11 +3,13 @@ package com.ieslasgalletas.back.configuration;
 public class AuthenticationResponse {
 	private String fullName;
 	private String role;
-	
-	public AuthenticationResponse(String fullName, String role) {
+	private int id;
+
+	public AuthenticationResponse(String fullName, String role, int id) {
 		super();
 		this.fullName = fullName;
 		this.role = role;
+		this.id = id;
 	}
 
 	public String getFullName() {
@@ -25,6 +27,10 @@ public class AuthenticationResponse {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public int getId() { return id; }
+
+	public void setId(int id) { this.id = id; }
 	
 	
 }

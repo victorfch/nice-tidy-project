@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="container">
     <h2>Nuevo usuario</h2>
     <hr />
     <div>
@@ -50,21 +50,19 @@
         </div>
         <div class="form-group">
           <label for="role">Rol</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="user.role"
-            id="role"
-            required
-          />
+          <select id="role" v-model="user.role">
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_RECEPCIONIST">RECEPCIONISTA</option>
+            <option value="ROLE_CHAMBERMAIDS">CAMARERO DE PISO</option>
+            <option value="ROLE_GOVER">GOBERNANTA</option>
+          </select>
+          <span> 
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button @click="$router.replace('/usuarios')" class="btn btn-secondary ml-4"> Cancelar </button>
+          </span>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <button
-          @click="$router.replace('/usuarios')"
-          class="btn btn-secondary ml-4"
-        >
-          Cancelar
-        </button>
+        <!-- <div class="buttons">
+        </div> -->
       </form>
     </div>
   </div>
@@ -118,4 +116,24 @@ export default {
 </script>
 
 <style scoped>
+input{
+  width: 80%;
+}
+select{
+  margin-top: 10px;
+  margin-left: 57px;
+  height: 35px;
+  border-radius: 5px;
+}
+span{
+  margin-top: 10px;
+  float: right;
+  margin-right: 10%;  
+}
+.btn:nth-child(){
+  float:right;
+}
+div.form-group{
+  margin-left: 5%;
+}
 </style>

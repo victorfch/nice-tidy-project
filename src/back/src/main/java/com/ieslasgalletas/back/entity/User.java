@@ -16,9 +16,9 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 
-	
+
 	@Column(name = "username", unique = true, nullable = false, length = 45)
 	private String username;
 
@@ -40,7 +40,7 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, String username, String name, String surname, String role, String password) {
+	public User(Integer id, String username, String name, String surname, String role, String password) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -50,8 +50,13 @@ public class User {
 		this.password = password;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -73,33 +78,13 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	public List<Room> getRooms() {
 		return rooms;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
 	}
 
 	public String getFullName() {
@@ -109,6 +94,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", name=" + name + ", surname=" + surname + ", role="
-				+ role + ", password=" + password + "]";
+				+ role + ", password=" + password + ", rooms=" + rooms + "]";
 	}
 }

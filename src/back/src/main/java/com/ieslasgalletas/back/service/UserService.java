@@ -16,9 +16,11 @@ public interface UserService {
 	public abstract List<User> getUsers();
 
 	public abstract User getUserById(int id);
-	
+
 	public abstract User getByUsername(AuthenticationRequest request);
-	
+
 	public abstract User updateUser(int id, User user);
+
+	public abstract List<User> getChambermaids();
 
 }

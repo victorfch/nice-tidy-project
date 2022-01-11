@@ -21,7 +21,7 @@ public class Room {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "number")
+	@Column(name = "number", unique = true)
 	private int number;
 
 	@Column(name = "beds_number")
@@ -49,11 +49,12 @@ public class Room {
 	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
+
 	public Room() {
 	}
 
 	public Room(int id, int number, int bedsNumber, Date checkInDate, Date checkOutDate, boolean isClean,
-			boolean isOccupied, boolean isUrgent, int type, User user) {
+				boolean isOccupied, boolean isUrgent, int type, User user) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -78,7 +79,7 @@ public class Room {
 	public int getBedsNumber() {
 		return bedsNumber;
 	}
-	
+
 	public Date getCheckInDate() {
 		return checkInDate;
 	}
@@ -122,17 +123,24 @@ public class Room {
 	public int getType() {
 		return type;
 	}
-	
-	public String getUser_id() {
+
+	public Integer getUser_id() {
 		if (user == null) {
-			return "";
+			return -1;
 		}
-		return user.getFullName();
+		return user.getId();
 	}
 
 	@JsonIgnore
 	public User getUser() {
 		return user;
+	}
+
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", number=" + number + ", bedsNumber=" + bedsNumber + ", checkInDate=" + checkInDate
+				+ ", checkOutDate=" + checkOutDate + ", isClean=" + isClean + ", isOccupied=" + isOccupied
+				+ ", isUrgent=" + isUrgent + ", type=" + type + ", user=" + user + "]";
 	}
 
 }
